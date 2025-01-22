@@ -2,6 +2,7 @@
 
 This is the dataset for [EmoWOZ: A Large-Scale Corpus and Labelling Scheme for Emotion Recognition in Task-Oriented Dialogue Systems](https://arxiv.org/abs/2109.04919). 
 
+The dataset is available in this repo under [emowoz-multiwoz.json](https://github.com/FinnHet13/CodingProjects/blob/09a880dc842480128c06cab9a0667e88f3fa1885/sentiment_analysis_bachelor_thesis/emowoz-multiwoz.json), or can alternatively be downloaded [here](https://zenodo.org/records/6506504#.ZFF4gc7P3b1). 
 
 ### Data
 
