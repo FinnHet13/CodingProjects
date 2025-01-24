@@ -31,7 +31,7 @@ Therefore, whichever model performs best on EmoWOZ should also perform best on o
 - Sentiment analysis
   - Sequential processing of text with three models: [3_Sentiment_analysis.ipynb](3_Sentiment_analysis.ipynb)
   - Parallel processing of text with three models with batching: [3_Sentiment_analysis_multithread_batch_processing.ipynb](3_Sentiment_analysis_multithread_batch_processing.ipynb)
-- Model evaluation [3_Sentiment_analysis.ipynb](3_Sentiment_analysis.ipynb) and [3_Sentiment_analysis_multithread_batch_processing.ipynb](3_Sentiment_analysis_multithread_batch_processing.ipynb) - Final sentiment predictions shown in [4_Sentiment_analysis_result.xslx](4_Sentiment_analysis_result.xslx)
+- Model evaluation [3_Sentiment_analysis.ipynb](3_Sentiment_analysis.ipynb) and [3_Sentiment_analysis_multithread_batch_processing.ipynb](3_Sentiment_analysis_multithread_batch_processing.ipynb) - Final sentiment predictions shown in [4_Sentiment_analysis_result.xlsx](4_Sentiment_analysis_result.xlsx)
 
 ## Results
 Comparison of accuracy of three models:
