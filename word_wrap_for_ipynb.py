@@ -1,47 +1,44 @@
 import nbformat
-import textwrap
-import re
+from black import format_str, FileMode
+import sys
+import os
 
-def advanced_wrap_notebook(notebook_path, width=88):
-    nb = nbformat.read(notebook_path, as_version=4)
-    for cell in nb.cells:
-        if cell['cell_type'] == 'code':
-            lines = cell['source'].split('\n')
-            wrapped_lines = []
-            
-            for line in lines:
-                # Preserve full-line comments and docstrings
-                if line.strip().startswith(('#', '"""', "'''")):
-                    wrapped_lines.append(line)
-                    continue
-                
-                # Handle lines with inline comments
-                comment_match = re.match(r'^(.*?)(\s*#.*)$', line)
-                if comment_match:
-                    code_part, comment_part = comment_match.groups()
-                    
-                    # Special handling for complex lines like DataFrame column definitions
-                    if '==' in code_part or '=' in code_part:
-                        wrapped_lines.append(line)
-                    else:
-                        # Wrap code part while preserving indentation
-                        indent = len(line) - len(line.lstrip())
-                        wrapped_code = textwrap.fill(
-                            code_part.rstrip(), 
-                            width=width-indent, 
-                            break_long_words=False, 
-                            break_on_hyphens=False
-                        )
-                        wrapped_line = line[:indent] + wrapped_code + comment_part
-                        wrapped_lines.append(wrapped_line)
-                else:
-                    # Standard line wrapping
-                    wrapped_lines.append(line)
-            
-            cell['source'] = '\n'.join(wrapped_lines)
+def format_notebook(notebook_path, output_path=None, line_length=88):
+    # Check if the file exists
+    if not os.path.exists(notebook_path):
+        print(f"Error: File '{notebook_path}' does not exist.")
+        sys.exit(1)
     
-    nbformat.write(nb, notebook_path)
+    # Load the notebook file
+    with open(notebook_path, "r", encoding="utf-8") as f:
+        notebook = nbformat.read(f, as_version=4)
 
-if __name__ == '__main__':
-    import sys
-    advanced_wrap_notebook(sys.argv[1])
+    # Format all code cells
+    for cell in notebook.cells:
+        if cell.cell_type == "code" and cell.source:  # Only format code cells
+            try:
+                cell.source = format_str(cell.source, mode=FileMode(line_length=line_length))
+            except Exception as e:
+                print(f"Skipping formatting for a cell due to an error: {e}")
+
+    # Set default output path if not provided
+    if not output_path:
+        output_path = f"formatted_{os.path.basename(notebook_path)}"
+
+    # Save the formatted notebook
+    with open(output_path, "w", encoding="utf-8") as f:
+        nbformat.write(notebook, f)
+
+    print(f"Formatted notebook saved as '{output_path}'")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python format_notebook.py <notebook_path> [output_path] [line_length]")
+        sys.exit(1)
+
+    notebook_path = sys.argv[1]
+    output_path = sys.argv[2] if len(sys.argv) > 2 else None
+    line_length = int(sys.argv[3]) if len(sys.argv) > 3 else 88
+
+    format_notebook(notebook_path, output_path, line_length)
