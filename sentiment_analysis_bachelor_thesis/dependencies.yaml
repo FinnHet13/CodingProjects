@@ -1,23 +1,16 @@
-name: new_env
 channels:
   - defaults
 dependencies:
-  - IPython.core.display
-  - IPython.display
-  - concurrent.futures
-  - json
-  - matplotlib.pyplot
+  - matplotlib=3.7.1
   - nltk=3.7
-  - nltk.corpus
   - numpy=1.26.4
-  - os
   - pandas=1.5.2
-  - pprint
-  - re
   - seaborn=0.13.2
-  - sklearn.metrics
-  - torch=2.2.0
+  - scikit-learn=1.2.0
+  - pytorch=2.2.0
   - tqdm=4.65.0
-  - tqdm.notebook
   - transformers=4.24.0
-  - pip
+  - pip=23.3.1
+  - python=3.10.13
+  - ipykernel=6.28.0
+  - jupyter=1.0.0
