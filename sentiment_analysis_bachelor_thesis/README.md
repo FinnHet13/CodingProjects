@@ -56,4 +56,5 @@ See [dependencies.yaml](dependencies.yaml)
 
 ## Contact
 Finn Hetzler
+
 finn.he@protonmail.com
