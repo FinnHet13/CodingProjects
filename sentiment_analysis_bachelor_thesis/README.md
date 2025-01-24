@@ -1,7 +1,7 @@
 # Sentiment Analysis Bachelor Thesis
 
 ## Overview
-As part of my bachelor thesis, I wanted to find a pre-trained transformer model to perform text-based sentiment analysis on a dataset of customer call.
+As part of my bachelor thesis, I wanted to find a pre-trained transformer model to perform text-based sentiment analysis on a dataset of customer calls.
 I evaluated three pre-trained transformer models from Hugging Face on their sentiment analysis performance on the EmoWoz dataset.
 The SieBERT model performed best with an accuracy of 91.7%.
 
