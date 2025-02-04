@@ -1,4 +1,4 @@
-Hi, I'm Finn Hetzler! 
+# Hi, I'm Finn Hetzler! 
 
 # About Me
 I'm an aspiring Data Scientist with a passion for data analysis and automation, always with the goal of adding value in terms of time savings and providing data-driven insights that make a change. This GitHub repo is the space where I want to share my coding progress through various projects.
