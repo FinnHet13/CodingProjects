@@ -1,4 +1,4 @@
-# Sentiment Analysis Bachelor Thesis
+# Sentiment Analysis with Transformer models
 
 ## Overview
 As part of my bachelor thesis, I wanted to find a pre-trained transformer model to perform text-based sentiment analysis on a dataset of customer calls.
