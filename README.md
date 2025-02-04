@@ -13,5 +13,6 @@ I'm an aspiring Data Scientist with a passion for data analysis and automation, 
 - Keep an eye out for upcoming projects!
 
 # Contact
-For more information on my background, feel free to check out my [LinkedIn](https://www.linkedin.com/in/finn-hetzler/)
+For more information on my background, feel free to check out my [LinkedIn](https://www.linkedin.com/in/finn-hetzler/).
+
 Also, feel free to reach out to me at [finn.he@protonmail.com](mailto:finn.he@protonmail.com). My DMs are always open :D.
