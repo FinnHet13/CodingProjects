@@ -1,4 +1,5 @@
 # Hi, I'm Finn Hetzler! 
+![That's me :)]([https://your-image-url.com/image.png](https://media.licdn.com/dms/image/v2/C4E03AQEdx8Dt3RLFBA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1621583437966?e=1744243200&v=beta&t=4KuK1ouWeWNALqB0zpodhRYrPUyJpjUNfEeAYXg4fBg))
 
 # About Me
 I'm an aspiring Data Scientist with a passion for data analysis and automation, always with the goal of adding value in terms of time savings and providing data-driven insights that make a change. This GitHub repo is the space where I want to share my coding progress through various projects.
