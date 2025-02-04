@@ -1,6 +1,6 @@
 # Hi, I'm Finn Hetzler! 
 
-<img src="https://media.licdn.com/dms/image/v2/C4E03AQEdx8Dt3RLFBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1621583437966?e=1744243200&v=beta&t=1RlpE67qIckkf4KwOTaqgyapDCrkVfAIURdZbsqltcg" alt="That's me :)" width="150">
+<img src="https://media.licdn.com/dms/image/v2/C4E03AQEdx8Dt3RLFBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1621583437966?e=1744243200&v=beta&t=1RlpE67qIckkf4KwOTaqgyapDCrkVfAIURdZbsqltcg" alt="That's me :)" width="200">
 
 # About Me
 I'm an aspiring Data Scientist with a passion for data analysis and automation, always with the goal of adding value in terms of time savings and providing data-driven insights that make a change. This GitHub repo is the space where I want to share my coding progress through various projects.
