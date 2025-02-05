@@ -1,4 +1,4 @@
-# Hi, I'm Finn Hetzler! 
+# Hi!
 
 <img src="https://media.licdn.com/dms/image/v2/C4E03AQEdx8Dt3RLFBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1621583437966?e=1744243200&v=beta&t=1RlpE67qIckkf4KwOTaqgyapDCrkVfAIURdZbsqltcg" alt="That's me :)" width="200">
 
