@@ -1,6 +1,6 @@
 # Hi!
 
-![That's me!](/assets/img/professional_picture.jpg)
+<img src="assets/img/professional_picture.jpg" alt="That's me :)" height="200">
 
 # About Me
 I'm Finn Hetzler, an aspiring Data Scientist with a passion for data analysis and automation, always with the goal of adding value in terms of time savings and providing data-driven insights that make a change. This GitHub repo is the space where I want to share my coding progress through various projects.
