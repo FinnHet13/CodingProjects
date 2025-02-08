@@ -1,4 +1,5 @@
 title: Finn Hetzler
-#logo:
+logo: /assets/img/professional_picture_circle.jpg
+description: This is where I show off my coding skills
 show_downloads: true
 theme: jekyll-theme-minimal
