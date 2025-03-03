@@ -1,0 +1,55 @@
+asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
+colorama @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/colorama_1699472650914/work
+comm @ file:///C:/b/abs_67a8058udb/croot/comm_1709322909844/work
+contourpy @ file:///D:/bld/contourpy_1731428318009/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1733332471406/work
+debugpy @ file:///C:/b/abs_bf9oo2vhxp/croot/debugpy_1736269476451/work
+decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
+executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
+fonttools @ file:///D:/bld/fonttools_1738940294907/work
+imbalanced-learn @ file:///home/conda/feedstock_root/build_artifacts/imbalanced-learn_1734717084342/work
+ipykernel @ file:///D:/bld/ipykernel_1719845595208/work
+ipython @ file:///C:/b/abs_8eyhzleyrk/croot/ipython_1734548134403/work
+jedi @ file:///C:/b/abs_3a2kbnlclc/croot/jedi_1733987412687/work
+joblib @ file:///home/conda/feedstock_root/build_artifacts/joblib_1733736026804/work
+jupyter_client @ file:///C:/b/abs_149bw133if/croot/jupyter_client_1737570986926/work
+jupyter_core @ file:///C:/b/abs_beftpbuevw/croot/jupyter_core_1718818307097/work
+kiwisolver @ file:///D:/bld/kiwisolver_1736908223141/work
+matplotlib==3.10.1
+matplotlib-inline @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/matplotlib-inline_1699484796387/work
+munkres==1.1.4
+nest-asyncio @ file:///C:/b/abs_65d6lblmoi/croot/nest-asyncio_1708532721305/work
+numpy @ file:///D:/bld/numpy_1739425594754/work/dist/numpy-2.2.3-cp312-cp312-win_amd64.whl#sha256=3bcd962c281bac98d206223bd3b43520a6b364f9f3be4213f874f44c705b3938
+packaging @ file:///C:/b/abs_3by6s2fa66/croot/packaging_1734472138782/work
+pandas @ file:///D:/bld/pandas_1726878552024/work
+parso @ file:///C:/b/abs_834b4mj92b/croot/parso_1733963322289/work
+patsy @ file:///home/conda/feedstock_root/build_artifacts/patsy_1733792384640/work
+pillow @ file:///D:/bld/pillow_1735929729156/work
+platformdirs @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/platformdirs_1701797392447/work
+prompt-toolkit @ file:///C:/b/abs_68uwr58ed1/croot/prompt-toolkit_1704404394082/work
+psutil @ file:///C:/b/abs_b5gv3mn55h/croot/psutil_1736371546320/work
+pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
+Pygments @ file:///C:/Users/dev-admin/perseverance-python-buildout/croot/pygments_1699474141968/work
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1735698276679/work
+PySide6==6.8.2
+python-dateutil @ file:///C:/b/abs_3au_koqnbs/croot/python-dateutil_1716495777160/work
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1706886791323/work
+pywin32==308
+pyzmq @ file:///C:/b/abs_f3yte6j5yn/croot/pyzmq_1734711069724/work
+scikit-learn @ file:///D:/bld/scikit-learn_1736496771611/work/dist/scikit_learn-1.6.1-cp312-cp312-win_amd64.whl#sha256=42050c203bd2dadf025d80896d54603d483c0323ab707a2cd90629145fe81901
+scipy @ file:///C:/bld/scipy-split_1739790745069/work/dist/scipy-1.15.2-cp312-cp312-win_amd64.whl#sha256=6143c228089946cda03218f94fcc2e1883a67f24023bffdb498bf88269edb217
+seaborn @ file:///home/conda/feedstock_root/build_artifacts/seaborn-split_1733730015268/work
+setuptools==75.8.2
+shiboken6==6.8.2
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+sklearn-compat @ file:///home/conda/feedstock_root/build_artifacts/sklearn-compat_1734794177910/work
+stack-data @ file:///opt/conda/conda-bld/stack_data_1646927590127/work
+statsmodels @ file:///D:/bld/statsmodels_1727986891317/work
+threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_1714400101435/work
+tornado @ file:///C:/b/abs_7cyu943ybx/croot/tornado_1733960510898/work
+traitlets @ file:///C:/b/abs_bfsnoxl4pq/croot/traitlets_1718227069245/work
+tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1737541069190/work
+unicodedata2 @ file:///D:/bld/unicodedata2_1736692520607/work
+wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
+wheel==0.45.1
+xgboost @ file:///home/conda/feedstock_root/build_artifacts/xgboost-split_1738880198843/work/python-package
