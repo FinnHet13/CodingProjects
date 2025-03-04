@@ -1,9 +1,7 @@
 # Predicting Customer Churn with Logistic Regression and XGBoost
 
 ## Overview
-As part of my Machine Learning course, I was tasked with training a machine learning model to maximize accuracy on a customer churn dataset of a telcom company.
-To this end, I trained a logistic regression and XGBoost model. The XGBoost model performed best with an accuracy of 97% on the test split of the dataset.
-The end-to-end pipeline of the best model is available as a Pickle file.
+Predicting customer churn in the telecom industry is crucial since research indicates that acquiring new clients can cost five to six times more than retaining existing ones (Verbeke et al., 2012). Based on this insight, I developed and evaluated machine learning models for churn prediction on a telcom churn dataset. Weighted accuracy was employed as the evaluation metric to place greater importance on correctly identifying the churners in the dataset. Both a logistic regression model and an XGBoost model were trained on the dataset, with the XGBoost model achieving the highest performance at __ weighted accuracy on the test split. The complete end-to-end pipeline for the best-performing model is available as a Pickle file.
 
 ## Objectives
 - Find the best prediction model for the dataset
@@ -33,6 +31,7 @@ See [requirements.txt](requirements.txt)
 
 ## References
 - Mnassri, B. (2019). Telecom Churn Dataset. Kaggle. https://www.kaggle.com/datasets/mnassrib/telecom-churn-datasets
+- Verbeke, W., Dejaeger, K., Martens, D., Hur, J., & Baesens, B. (2012). New insights into churn prediction in the telecommunication sector: A profit driven data mining approach. European Journal of Operational Research, 218(1), 211–229. https://doi.org/10.1016/j.ejor.2011.09.031
 - With generous help from Claude 3.7 Sonnet :)
 
 ## Contact
