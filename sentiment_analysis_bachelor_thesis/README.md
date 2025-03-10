@@ -37,9 +37,9 @@ Therefore, whichever model performs best on EmoWOZ should also perform best on o
 Comparison of accuracy of three models:
 | Model   | Accuracy |
 |---------|----------|
-| SieBERT | 0.917058 |
-| RoBERTa | 0.885256 |
-| XLNet   | 0.864533 |
+| SieBERT | 91.7%    |
+| RoBERTa | 88.5%    |
+| XLNet   | 86.4%    |
 
 Comparison of time taken for three models to complete sentiment analysis with different processing methods:
 | Processing method used              | Time taken |
