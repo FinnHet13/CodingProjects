@@ -1,3 +1,12 @@
+# Script to load the XGBoost model, and make predictions on an example
+# of a validation dataset.
+# This script assumes that the preprocessing pipeline and the model have been saved as pickle files.
+# Ex. 2_preprocessor.pkl and 3_best_model.pkl
+
+# Import necessary libraries
+import pickle
+import pandas as pd
+
 # First transformer to convert categorical to binary
 def convert_to_binary(X_save):
     if 'International plan' in X_save.columns:
@@ -21,9 +30,6 @@ def feature_engineering(X_save):
     X_save['Average charge per call'] = X_save['Total charge'] / X_save['Total calls']
 
     return X_save
-
-import pickle
-import pandas as pd
 
 # Load the preprocessing pipeline (including feature engineering)
 with open("2_preprocessor.pkl", "rb") as file:
