@@ -41,7 +41,8 @@ validation_df.head()
 # Apply feature engineering and preprocessing together
 new_data_transformed = loaded_preprocessor.transform(validation_df)
 
-# Make prediction using the loaded XGBoost model
+# Make predictions using the loaded XGBoost model
 xgb_prediction = xgb_loaded_model.predict(new_data_transformed)
 
+# Example of how to use the model to make a prediction
 print(f"XGBoost Prediction: {xgb_prediction[0]}")
