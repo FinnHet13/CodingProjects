@@ -7,6 +7,7 @@ def convert_to_binary(X_save):
     return X_save
 
 
+# All the feature engineering steps for the XGBoost model
 def feature_engineering(X_save):
     # Add total charge column
     X_save['Total charge'] = X_save['Total day charge'] + X_save['Total eve charge'] + X_save['Total night charge'] + X_save['Total intl charge']
