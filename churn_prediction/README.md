@@ -21,14 +21,16 @@ The dataset is suitable for supervised machine learning as it is a binary classi
 [5_apply_model.py](5_apply_model.py)
 
 ## Results
-Comparison of costs of the different scenarios / models tested:
-| Model                                 | Total Cost |
-|---------------------------------------|------------|
-| **Final XGBoost Regression Model**    | **148.5**  |
-| Final Logistic Regression Model       | 302.0      |
-| Base Logistic Regression Model        | 323.0      |
-| Scenario 2: Retain no customer        | 478.5      |
-| Scenario 1: Retain every customer     | 600.0      |
+Comparison of costs of the different scenarios / models tested (note these are to be seen relative to each other and not as absolute values)
+| Model                                 | Total Cost | Relative Cost (vs Baseline Scenario 1) |
+|---------------------------------------|------------|----------------------------------------|
+| **Final XGBoost Regression Model**    | **148.5**  | **24.8%**                              |
+| Final Logistic Regression Model       | 302.0      | 50.3%                                  |
+| Base Logistic Regression Model        | 323.0      | 53.8%                                  |
+| Scenario 2: Retain no customer        | 478.5      | 79.8%                                  |
+| Scenario 1: Retain every customer     | 600.0      | 100.0%                                 |
+
+I was able to decrease the cost for the company by over a factor of 4 or by 75% from 600 units to 148.5 units using the best model.
 
 ## Dependencies
 See [requirements.txt](requirements.txt)
