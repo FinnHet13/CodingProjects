@@ -38,7 +38,7 @@ See [requirements.txt](requirements.txt)
 ## References
 - Mnassri, B. (2019). Telecom Churn Dataset. Kaggle. https://www.kaggle.com/datasets/mnassrib/telecom-churn-datasets
 - Verbeke, W., Dejaeger, K., Martens, D., Hur, J., & Baesens, B. (2012). New insights into churn prediction in the telecommunication sector: A profit driven data mining approach. European Journal of Operational Research, 218(1), 211–229. https://doi.org/10.1016/j.ejor.2011.09.031
-- With generous help from Claude 3.7 Sonnet :)
+- With generous help from Claude 3.7 Sonnet and Gemini 2.5 :)
 
 ## Contact
 Finn Hetzler
