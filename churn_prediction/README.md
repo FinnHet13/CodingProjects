@@ -17,7 +17,7 @@ The dataset is suitable for supervised machine learning as it is a binary classi
 - Pickle file containing preprocessing pipeline of best model: [2_preprocessor.pkl](2_preprocessor.pkl) 
 - Pickle file containing best model (XGBoost): [3_best_model.pkl](3_best_model.pkl)
 - Small validation dataset for testing the Pickle files: [4_validation_dataset.csv](4_validation_dataset.csv)
-- Script showing example application of the machine learning model on the validation dataset
+- Script showing example application of the machine learning model on the validation dataset:
 [5_apply_model.py](5_apply_model.py)
 
 ## Results
