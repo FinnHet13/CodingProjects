@@ -26,6 +26,7 @@ Regarding the 3 objectives for the project set above:
 - **Objective 1**: I built one simpler (Logistic Regression) and one more complex (XGBoost) end-to-end machine learning pipeline and compared the performance of the two models.
 
 - **Objective 2**: Comparison of costs of the different scenarios / models tested (note these are to be seen relative to each other and not as absolute values)
+
 | Model                                 | Total Cost | Cost Reduction (vs Baseline Scenario 1) |
 |---------------------------------------|------------|-----------------------------------------|
 | Scenario 1: Retain every customer     | 600.0      | 0.0%                                    |
