@@ -1,4 +1,4 @@
-# Predicting Customer Churn with Logistic Regression and XGBoost
+# Predicting Churn with Machine Learning
 
 ## Overview
 Customer churn is a crucial issue for telcom companies since Telecom is largely a subscription-based business. This means each churned customer represents a direct loss of recurring monthly or annual revenue. Research has shown that **acquiring new clients** can cost **five to six times** more than **retaining existing ones** (Verbeke et al., 2012). Based on this insight, I developed and evaluated 2 machine learning models for churn prediction on a telcom churn dataset. A simple cost function representing the acquisition costs relative to retention costs was employed as the evaluation metric to place greater importance on correctly identifying the churners in the dataset. Both a logistic regression model and an XGBoost model were trained on the dataset, with the **XGBoost model achieving the lowest cost**, an over **75% cost reduction** relative to the **baseline scenario of retaining every customer**. The complete end-to-end pipeline for the best-performing model is available as a Pickle file.
