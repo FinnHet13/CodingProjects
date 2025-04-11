@@ -2,7 +2,7 @@
 # of a validation dataset.
 # This script assumes that the preprocessing pipeline and the model have been saved as pickle files.
 # Ex. 2_preprocessor.pkl and 3_best_model.pkl
-# It also assumes the validation dataset is a csv file formatted correctly with the same features as the training dataset.
+# It also assumes the validation dataset is a csv file formatted correctly with the same features as the training dataset and without the "Churn" label.
 # Ex. 4_validation_dataset.csv
 
 # Import necessary libraries
