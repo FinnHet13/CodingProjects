@@ -1,5 +1,7 @@
-# Hi!
-I'm Finn Hetzler, an aspiring Data Scientist with a passion for data analysis, automation and AI, always with the goal of adding value, be it by saving time, improving capabilities, or enabling data-driven decision-making. This GitHub repo is the space where I want to share my coding progress through various projects.
+# Hi, I'm Finn Hetzler!
+Relentlessly curious and passionate about bridging business insights with computer science, I aim to build solutions for *actual* problems. My driving goal is to leverage technology in ways that genuinely boost productivity and thereby lower stress for as many people as possible.
+
+This repo serves as my space to share my coding progress – largely self-taught – through various projects. Follow along, and please feel free to share feedback – I'm always open to it!
 
 # Tech Stack
 - Primary language: Python
