@@ -38,7 +38,7 @@ Regarding the 3 objectives for the project set above:
 
 I was able to decrease the cost for the company by over a factor of 4 (>75%) from 600 units to 136 units using the best model.
 
-- **Objective 3**: The project involved generous help from **Claude 3.7 Sonnet** and **Gemini 2.5 Pro**. I spent the largest part of this project specifying prompts to these models and checking their outputs, rather than coding myself. I actually felt my supervisory skills and ability to formulate precise questions were improved most by this project, more so than my coding skills. Most interesting was when Gemini 2.5 reformulated my functions to include explicit error handling, something I, as someone who largely self-taught myself to program, had not thought of implementing myself. In that moment, I actually felt like it was the model that was teaching **me** how to code better. What a time to be alive :)
+- **Objective 3**: The project involved generous help from **Claude 3.7 Sonnet** and **Gemini 2.5 Pro**. I spent the largest part of this project specifying prompts to these models and checking their outputs, rather than coding myself. I actually felt my supervisory skills and ability to formulate precise questions were improved most by this project, more so than my coding skills. Most interesting was when Gemini 2.5 reformulated my functions to include explicit error handling, something I, as someone who largely self-taught myself programming, had not thought of implementing myself. In that moment, I actually felt like it was the model that was teaching **me** how to code better. What a time to be alive :)
 
 ## Dependencies
 See [requirements.txt](requirements.txt)
