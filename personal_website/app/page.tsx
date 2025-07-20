@@ -54,27 +54,25 @@ export default function HomePage() {
               />
             </div>
             <div className="flex-1">
-              <h1 className="text-4xl font-bold mb-4">John Doe</h1>
-              <p className="text-xl text-gray-300 mb-6">Full Stack Developer & Software Engineer</p>
+              <h1 className="text-4xl font-bold mb-4">Finn Hetzler</h1>
+              <p className="text-xl text-gray-300 mb-6">Master in Business Analytics Student</p>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Passionate about creating efficient, scalable solutions and exploring new technologies. I enjoy working
-                on both frontend and backend development, with a focus on modern web technologies and clean,
-                maintainable code.
+                Passionate about bridging business and technology. I am currently shifting my focus from BI to AI. With this website, my goal is to share my (largely self-taught) coding progress. Feel free to reach out with feedback, questions, or just to connect! 
               </p>
               <div className="flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2 text-gray-400">
                   <MapPin className="w-4 h-4" />
-                  San Francisco, CA
+                  Frankfurt, Germany
                 </div>
                 <Link
-                  href="mailto:john.doe@example.com"
+                  href="mailto:finn.he@protonmail.com"
                   className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <Mail className="w-4 h-4" />
-                  john.doe@example.com
+                  finn.he@protonmail.com
                 </Link>
                 <Link
-                  href="https://github.com/johndoe"
+                  href="https://github.com/FinnHet13/CodingProjects"
                   className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <Github className="w-4 h-4" />
