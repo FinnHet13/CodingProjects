@@ -46,7 +46,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-start gap-8">
             <div className="flex-shrink-0">
               <Image
-                src="assets/profile-pic.jpg"
+                src="profile-pic.jpg"
                 alt="Profile Picture"
                 width={200}
                 height={200}
