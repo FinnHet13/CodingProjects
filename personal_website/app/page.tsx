@@ -49,18 +49,18 @@ export default function HomePage() {
                   Frankfurt, Germany
                 </div>
                 <Link
-                  href="mailto:finn.he@protonmail.com"
-                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  <Mail className="w-4 h-4" />
-                  finn.he@protonmail.com
-                </Link>
-                <Link
                   href="https://github.com/FinnHet13/CodingProjects"
                   className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <Github className="w-4 h-4" />
                   GitHub
+                </Link>
+                <Link
+                  href="mailto:finn.he@protonmail.com"
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  finn.he@protonmail.com
                 </Link>
                 <Link
                   href="https://www.linkedin.com/in/finn-hetzler/"
