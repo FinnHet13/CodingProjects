@@ -1,5 +1,5 @@
 # Hi, I'm Finn Hetzler!
-With this repo I want to share my (largely self-taught) coding progress through various projects. Follow along, and feel free to share feedback.
+With this repo I want to share my (largely self-taught) coding progress through various projects.
 
 # Tech Stack
 - Primary language: Python
