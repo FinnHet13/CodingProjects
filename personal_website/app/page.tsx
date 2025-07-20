@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ExternalLink, Github, Linkedin, Mail, MapPin } from "lucide-react"
+import FloatingCodeBackground from '../components/floating-code-background'
 
 export default function HomePage() {
   const projects = [
@@ -23,9 +24,11 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white relative">
+      {/* Floating Code Background */}
+      <FloatingCodeBackground />
       {/* Header/Profile Section */}
-      <header className="border-b border-gray-800">
+      <header className="border-b border-gray-800" relative z-10>
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="flex flex-col md:flex-row items-start gap-8">
             <div className="flex-shrink-0">
@@ -76,7 +79,7 @@ export default function HomePage() {
       </header>
 
       {/* Projects Section */}
-      <main className="max-w-4xl mx-auto px-6 py-12">
+      <main className="max-w-4xl mx-auto px-6 py-12 relative z-10">
         <h2 className="text-3xl font-bold mb-8">Projects</h2>
         <div className="space-y-8">
           {projects.map((project, index) => (
