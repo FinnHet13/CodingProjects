@@ -22,7 +22,7 @@ export default function FloatingCodeBackground() {
   const codeTexts = [
     'const', 'function', 'return', '=>', '{}', '[]', '<>', 'import', 'export',
     'async', 'await', 'class', 'let', 'var', 'if', 'else', 'for', 'while',
-    '&&', '||', '===', '!==', '...', 'map()', 'filter()', 'reduce()',
+    '&&', '||', '==', '!==', '...', 'map()', 'filter()', 'reduce()',
     'useState', 'useEffect', 'props', 'state', 'render', 'component'
   ]
 
@@ -44,13 +44,14 @@ export default function FloatingCodeBackground() {
     // Initialize code snippets
     const initSnippets = () => {
       snippetsRef.current = []
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 32; i++) {
         snippetsRef.current.push({
           id: i,
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
+          // Initial speed of the code snippet
+          vx: (Math.random() - 0.5) * 1,
+          vy: (Math.random() - 0.5) * 1,
           text: codeTexts[Math.floor(Math.random() * codeTexts.length)],
           size: Math.random() * 8 + 10,
           opacity: Math.random() * 0.3 + 0.1
@@ -91,7 +92,7 @@ export default function FloatingCodeBackground() {
         if (snippet.y < -50) snippet.y = canvas.height + 50
         if (snippet.y > canvas.height + 50) snippet.y = -50
 
-        // Friction
+        // Friction (how quickly the snippets slow down when not affected by mouse)
         snippet.vx *= 0.99
         snippet.vy *= 0.99
 
