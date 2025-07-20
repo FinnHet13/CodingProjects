@@ -26,7 +26,8 @@ It best represents actual customer calls as these too are task-oriented dialogue
 Therefore, whichever model performs best on EmoWOZ should also perform best on other customer call datasets.
 
 ## Methodology
-- Dataset cleaning: [1_EmoWoz_Setup.ipynb](1_EmoWoz_Setup.ipynb) - Result in [2_EmoWoz_Dataset.xlsx](2_EmoWoz_Dataset.xlsx)
+- Dataset cleaning: [1_EmoWoz_Setup.ipynb](1_EmoWoz_Setup.ipynb)
+- Result in [2_EmoWoz_Dataset.xlsx](2_EmoWoz_Dataset.xlsx)
 - Text pre-processing (text cleaning and stopword removal): [3_Sentiment_analysis.ipynb](3_Sentiment_analysis.ipynb) and [3_Sentiment_analysis_multithread_batch_processing.ipynb](3_Sentiment_analysis_multithread_batch_processing.ipynb)
 - Sentiment analysis
   - Sequential processing of text with three models: [3_Sentiment_analysis.ipynb](3_Sentiment_analysis.ipynb)
