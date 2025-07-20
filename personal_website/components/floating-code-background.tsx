@@ -19,12 +19,17 @@ export default function FloatingCodeBackground() {
   const mouseRef = useRef({ x: 0, y: 0 })
   const animationRef = useRef<number>()
 
+  // Sample code snippets to display
   const codeTexts = [
     'const', 'function', 'return', '=>', '{}', '[]', '<>', 'import', 'export',
     'async', 'await', 'class', 'let', 'var', 'if', 'else', 'for', 'while',
     '&&', '||', '==', '!==', '...', 'map()', 'filter()', 'reduce()',
     'useState', 'useEffect', 'props', 'state', 'render', 'component'
   ]
+
+  // Constants for the animation
+  const BASE_SPEED = 0.3 // Baseline speed snippets return to
+  const SPEED_RETURN_FORCE = 0.01 // How quickly snippets return to baseline
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -69,17 +74,39 @@ export default function FloatingCodeBackground() {
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
+  
       snippetsRef.current.forEach(snippet => {
+      // Store original velocity direction for baseline speed
+        if (!snippet.baseVx) {
+          snippet.baseVx = snippet.vx > 0 ? BASE_SPEED : -BASE_SPEED
+          snippet.baseVy = snippet.vy > 0 ? BASE_SPEED : -BASE_SPEED
+        }
+
         // Mouse repulsion effect
         const dx = snippet.x - mouseRef.current.x
         const dy = snippet.y - mouseRef.current.y
         const distance = Math.sqrt(dx * dx + dy * dy)
         
+        // If the mouse is close, apply a repulsion force
         if (distance < 100) {
           const force = (100 - distance) / 100
           snippet.vx += (dx / distance) * force * 0.02
           snippet.vy += (dy / distance) * force * 0.02
+        }
+
+        // Return to baseline speed when not affected by mouse
+        const currentSpeed = Math.sqrt(snippet.vx * snippet.vx + snippet.vy * snippet.vy)
+
+        if (distance > 100 && currentSpeed < BASE_SPEED) {
+          // Gradually return to baseline speed
+          snippet.vx += (snippet.baseVx - snippet.vx) * SPEED_RETURN_FORCE
+          snippet.vy += (snippet.baseVy - snippet.vy) * SPEED_RETURN_FORCE
+        } else if (distance > 100) {
+          // Apply gentle friction only when moving faster than baseline
+          if (currentSpeed > BASE_SPEED) {
+            snippet.vx *= 0.99
+            snippet.vy *= 0.99
+            }
         }
 
         // Update position
@@ -91,10 +118,6 @@ export default function FloatingCodeBackground() {
         if (snippet.x > canvas.width + 50) snippet.x = -50
         if (snippet.y < -50) snippet.y = canvas.height + 50
         if (snippet.y > canvas.height + 50) snippet.y = -50
-
-        // Friction (how quickly the snippets slow down when not affected by mouse)
-        snippet.vx *= 0.99
-        snippet.vy *= 0.99
 
         // Draw snippet
         ctx.font = `${snippet.size}px 'Courier New', monospace`
