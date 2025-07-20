@@ -1,5 +1,5 @@
 # Hi, I'm Finn Hetzler!
-I am relentlessly curious and passionate about bridging business insights with computer science. My goal is to build solutions for *actual* problems, especially leveraging technology in ways that genuinely boost productivity and thereby lower stress for as many people as possible.
+I am relentlessly curious and passionate about bridging business insights with computer science. My goal is to build solutions for *actual* problems, by leveraging technology in ways that genuinely boost productivity and thereby lower stress for as many people as possible.
 
 With this repo I want to share my (largely self-taught) coding progress through various projects. Follow along, and feel free to share feedback.
 
