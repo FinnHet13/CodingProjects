@@ -1,1 +1,5 @@
 *.json filter=lfs diff=lfs merge=lfs -text
+
+# Exclude the project_website project from LFS
+personal_website/*.json !filter !diff !merge text
+personal_website/**/*.json !filter !diff !merge text
