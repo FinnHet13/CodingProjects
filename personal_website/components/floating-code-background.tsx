@@ -8,6 +8,8 @@ interface CodeSnippet {
   y: number
   vx: number
   vy: number
+  baseVx?: number // Original velocity direction for baseline speed
+  baseVy?: number // Original velocity direction for baseline speed  
   text: string
   size: number
   opacity: number
