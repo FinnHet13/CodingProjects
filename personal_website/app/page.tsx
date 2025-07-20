@@ -5,35 +5,19 @@ import { ExternalLink, Github, Mail, MapPin } from "lucide-react"
 export default function HomePage() {
   const projects = [
     {
-      title: "E-Commerce Platform",
+      title: "Predicting Churn with Machine Learning",
       description:
-        "A full-stack e-commerce solution built with Next.js, TypeScript, and Stripe integration. Features include user authentication, product management, and secure payment processing.",
-      technologies: ["Next.js", "TypeScript", "Stripe", "Prisma"],
-      githubUrl: "https://github.com/username/ecommerce-platform",
-      liveUrl: "https://ecommerce-demo.vercel.app",
+        "Two machine learning models predicting customer churn for a telecommunications company, using Python and scikit-learn. The project includes data preprocessing, model training, and evaluation.",
+      technologies: ["Python", "scikit-learn", "Pandas", "NumPy"],
+      githubUrl: "https://github.com/FinnHet13/CodingProjects/tree/main/churn_prediction",
+      liveUrl: null,
     },
     {
-      title: "Task Management App",
+      title: "Sentiment Analysis with Transformers",
       description:
-        "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
-      githubUrl: "https://github.com/username/task-manager",
-      liveUrl: "https://taskmanager-demo.vercel.app",
-    },
-    {
-      title: "Weather Dashboard",
-      description:
-        "A responsive weather dashboard that displays current conditions and forecasts using OpenWeatherMap API with interactive charts and location-based services.",
-      technologies: ["Vue.js", "Chart.js", "OpenWeatherMap API", "Tailwind CSS"],
-      githubUrl: "https://github.com/username/weather-dashboard",
-      liveUrl: "https://weather-dashboard-demo.vercel.app",
-    },
-    {
-      title: "Machine Learning Model Deployment",
-      description:
-        "A Flask web application that serves a trained machine learning model for image classification with a clean REST API interface.",
-      technologies: ["Python", "Flask", "TensorFlow", "Docker"],
-      githubUrl: "https://github.com/username/ml-deployment",
+        "Benchmark of three transformer models (SieBERT, RoBERTa and XLNet) for sentiment analysis on a dataset of customer-agent dialogues. The project includes data pre-processing, sequential and parallel processing, and evaluation.",
+      technologies: ["Python", "Transformers", "Pandas", "NumPy"],
+      githubUrl: "https://github.com/FinnHet13/CodingProjects/tree/main/sentiment_analysis_bachelor_thesis",
       liveUrl: null,
     },
   ]
@@ -131,7 +115,7 @@ export default function HomePage() {
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500">
-          <p>© 2024 John Doe. Built with Next.js and deployed on Vercel.</p>
+          <p>© 2025 Finn Hetzler. Built with Next.js and deployed on Vercel.</p>
         </footer>
       </main>
     </div>
