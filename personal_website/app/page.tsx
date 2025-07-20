@@ -7,7 +7,7 @@ export default function HomePage() {
     {
       title: "Predicting Churn with Machine Learning",
       description:
-        "Two machine learning models predicting customer churn for a telecommunications company, using Python and scikit-learn. The project includes data preprocessing, model training, and evaluation.",
+        "Minimizing cost of churn with 2 machine learning models (Logistic Regression and XGBoost) for a telecommunications company. The project includes data preprocessing, model training, and evaluation. Cost reduction of >75% achieved vs. baseline.",
       technologies: ["Python", "scikit-learn", "Pandas", "NumPy"],
       githubUrl: "https://github.com/FinnHet13/CodingProjects/tree/main/churn_prediction",
       liveUrl: null,
@@ -15,7 +15,7 @@ export default function HomePage() {
     {
       title: "Sentiment Analysis with Transformers",
       description:
-        "Benchmark of three transformer models (SieBERT, RoBERTa and XLNet) for sentiment analysis on a dataset of customer-agent dialogues. The project includes data pre-processing, sequential and parallel processing, and evaluation.",
+        "Benchmark of three transformer models (SieBERT, RoBERTa and XLNet) for sentiment analysis on a dataset of customer-agent dialogues. The project includes data pre-processing, sequential and parallel processing, and evaluation. Best accuracy of >90% achieved with SieBERT.",
       technologies: ["Python", "Transformers", "Pandas", "NumPy"],
       githubUrl: "https://github.com/FinnHet13/CodingProjects/tree/main/sentiment_analysis_bachelor_thesis",
       liveUrl: null,
