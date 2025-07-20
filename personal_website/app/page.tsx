@@ -15,7 +15,7 @@ export default function HomePage() {
     {
       title: "Sentiment Analysis with Transformers",
       description:
-        "Benchmark of three transformer models (SieBERT, RoBERTa and XLNet) for sentiment analysis on a dataset of customer-agent dialogues. The project includes data pre-processing, sequential and parallel processing, and evaluation. Best accuracy of >90% achieved with SieBERT.",
+        "Benchmark of three transformer models (SieBERT, RoBERTa and XLNet) for sentiment analysis on a dataset of customer-agent dialogues. The project includes data cleaning, a comparison of sequential and parallel NLP processing, and model evaluation. Best accuracy of >90% achieved with SieBERT.",
       technologies: ["Python", "Transformers", "Pandas", "NumPy"],
       githubUrl: "https://github.com/FinnHet13/CodingProjects/tree/main/sentiment_analysis_bachelor_thesis",
       liveUrl: null,
