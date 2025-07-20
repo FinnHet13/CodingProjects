@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ExternalLink, Github, Mail, MapPin } from "lucide-react"
+import { ExternalLink, Github, Linkedin, Mail, MapPin } from "lucide-react"
 
 export default function HomePage() {
   const projects = [
@@ -61,6 +61,13 @@ export default function HomePage() {
                 >
                   <Github className="w-4 h-4" />
                   GitHub
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/in/finn-hetzler/"
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+                >
+                  <Linkedin className="w-4 h-4" />
+                  LinkedIn
                 </Link>
               </div>
             </div>
