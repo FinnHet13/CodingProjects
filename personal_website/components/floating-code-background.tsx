@@ -61,7 +61,7 @@ export default function FloatingCodeBackground() {
           vy: (Math.random() - 0.5) * 1,
           text: codeTexts[Math.floor(Math.random() * codeTexts.length)],
           size: Math.random() * 8 + 10,
-          opacity: Math.random() * 0.3 + 0.1
+          opacity: Math.random() * 0.3 + 0.3
         })
       }
     }
