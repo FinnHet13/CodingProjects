@@ -7,7 +7,7 @@ With this repo I want to share my (largely self-taught) coding progress through 
 - Softwares I've worked with: PowerBI, Tableau, Databricks, MS Office, MS Dynamics 365, Salesforce, Matomo, Altaire RapidMiner, OutSystems
 
 # Projects
-See my [Project Website](finnhetzler.vercel.app/)
+See my [Project Website](https://finnhetzler.vercel.app/)
 
 # Contact
 For more information on my background, feel free to check out my [LinkedIn](https://www.linkedin.com/in/finn-hetzler/).
