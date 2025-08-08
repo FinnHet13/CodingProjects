@@ -63,7 +63,7 @@ export default function HomePage() {
                   className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <Mail className="w-4 h-4" />
-                  finn.he@protonmail.com
+                  E-mail
                 </Link>
                 <Link
                   href="https://www.linkedin.com/in/finn-hetzler/"
