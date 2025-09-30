@@ -44,7 +44,7 @@ export default function HomePage() {
               <h1 className="text-4xl font-bold mb-4">Finn Hetzler</h1>
               <p className="text-xl text-gray-300 mb-6">Master in Business Analytics Student</p>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Passionate about bridging business and technology. I am currently shifting my focus from BI to AI. Here, I share my (largely self-taught) coding progress. Feel free to reach out with feedback, questions, or just to connect!
+                Here, I share my (largely self-taught) coding progress with projects reflecting my passion of bridging business and technology. Feel free to reach out with feedback, questions, or just to connect!
               </p>
               <div className="flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2 text-gray-400">
