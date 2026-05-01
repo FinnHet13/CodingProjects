@@ -13,12 +13,14 @@ interface CodeSnippet {
   text: string
   size: number
   opacity: number
+  parallaxFactor: number // How much this snippet responds to scroll (0.2-1.0)
 }
 
 export default function FloatingCodeBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const snippetsRef = useRef<CodeSnippet[]>([])
   const mouseRef = useRef({ x: 0, y: 0 })
+  const scrollRef = useRef({ y: 0, prevY: 0 })
   const animationRef = useRef<number>()
 
   // Sample code snippets to display
@@ -61,7 +63,8 @@ export default function FloatingCodeBackground() {
           vy: (Math.random() - 0.5) * 1,
           text: codeTexts[Math.floor(Math.random() * codeTexts.length)],
           size: Math.random() * 8 + 10,
-          opacity: Math.random() * 0.3 + 0.3
+          opacity: Math.random() * 0.3 + 0.3,
+          parallaxFactor: Math.random() * 0.8 + 0.2 // Different depths for parallax effect
         })
       }
     }
@@ -73,11 +76,25 @@ export default function FloatingCodeBackground() {
     }
     window.addEventListener('mousemove', handleMouseMove)
 
+    // Scroll tracking for parallax effect
+    const handleScroll = () => {
+      scrollRef.current.prevY = scrollRef.current.y
+      scrollRef.current.y = window.scrollY
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+      
+      // Calculate scroll delta for smooth parallax
+      const scrollDelta = scrollRef.current.y - scrollRef.current.prevY
   
       snippetsRef.current.forEach(snippet => {
+        // Apply scroll-based parallax movement
+        if (scrollDelta !== 0) {
+          snippet.y += scrollDelta * snippet.parallaxFactor
+        }
       // Store original velocity direction for baseline speed
         if (!snippet.baseVx) {
           snippet.baseVx = snippet.vx > 0 ? BASE_SPEED : -BASE_SPEED
@@ -127,6 +144,9 @@ export default function FloatingCodeBackground() {
         ctx.fillText(snippet.text, snippet.x, snippet.y)
       })
 
+      // Reset prevY to current to avoid accumulating delta
+      scrollRef.current.prevY = scrollRef.current.y
+      
       animationRef.current = requestAnimationFrame(animate)
     }
     animate()
@@ -134,6 +154,7 @@ export default function FloatingCodeBackground() {
     return () => {
       window.removeEventListener('resize', resizeCanvas)
       window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('scroll', handleScroll)
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
