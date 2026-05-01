@@ -13,14 +13,12 @@ interface CodeSnippet {
   text: string
   size: number
   opacity: number
-  parallaxFactor: number // How much this snippet responds to scroll (0.2-1.0)
 }
 
 export default function FloatingCodeBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const snippetsRef = useRef<CodeSnippet[]>([])
   const mouseRef = useRef({ x: 0, y: 0 })
-  const scrollRef = useRef({ y: 0, prevY: 0 })
   const animationRef = useRef<number>()
 
   // Sample code snippets to display
@@ -42,18 +40,29 @@ export default function FloatingCodeBackground() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Set canvas size
+    // Set canvas size to cover full document
     const resizeCanvas = () => {
+      const docHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        window.innerHeight
+      )
       canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      canvas.height = docHeight
     }
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
+    
+    // Also resize when content changes (use MutationObserver)
+    const observer = new MutationObserver(resizeCanvas)
+    observer.observe(document.body, { childList: true, subtree: true })
 
-    // Initialize code snippets
+    // Initialize code snippets - more snippets to cover full document height
     const initSnippets = () => {
       snippetsRef.current = []
-      for (let i = 0; i < 32; i++) {
+      // Scale snippet count based on document height
+      const snippetCount = Math.max(48, Math.floor((canvas.height / window.innerHeight) * 32))
+      for (let i = 0; i < snippetCount; i++) {
         snippetsRef.current.push({
           id: i,
           x: Math.random() * canvas.width,
@@ -63,39 +72,26 @@ export default function FloatingCodeBackground() {
           vy: (Math.random() - 0.5) * 1,
           text: codeTexts[Math.floor(Math.random() * codeTexts.length)],
           size: Math.random() * 8 + 10,
-          opacity: Math.random() * 0.3 + 0.3,
-          parallaxFactor: Math.random() * 0.8 + 0.2 // Different depths for parallax effect
+          opacity: Math.random() * 0.3 + 0.3
         })
       }
     }
     initSnippets()
 
-    // Mouse tracking
+    // Mouse tracking - account for scroll position
     const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY }
+      mouseRef.current = { x: e.clientX, y: e.clientY + window.scrollY }
     }
     window.addEventListener('mousemove', handleMouseMove)
 
-    // Scroll tracking for parallax effect
-    const handleScroll = () => {
-      scrollRef.current.prevY = scrollRef.current.y
-      scrollRef.current.y = window.scrollY
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
+
 
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      // Calculate scroll delta for smooth parallax
-      const scrollDelta = scrollRef.current.y - scrollRef.current.prevY
   
       snippetsRef.current.forEach(snippet => {
-        // Apply scroll-based parallax movement
-        if (scrollDelta !== 0) {
-          snippet.y += scrollDelta * snippet.parallaxFactor
-        }
-      // Store original velocity direction for baseline speed
+        // Store original velocity direction for baseline speed
         if (!snippet.baseVx) {
           snippet.baseVx = snippet.vx > 0 ? BASE_SPEED : -BASE_SPEED
           snippet.baseVy = snippet.vy > 0 ? BASE_SPEED : -BASE_SPEED
@@ -144,9 +140,6 @@ export default function FloatingCodeBackground() {
         ctx.fillText(snippet.text, snippet.x, snippet.y)
       })
 
-      // Reset prevY to current to avoid accumulating delta
-      scrollRef.current.prevY = scrollRef.current.y
-      
       animationRef.current = requestAnimationFrame(animate)
     }
     animate()
@@ -154,7 +147,7 @@ export default function FloatingCodeBackground() {
     return () => {
       window.removeEventListener('resize', resizeCanvas)
       window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
@@ -164,7 +157,7 @@ export default function FloatingCodeBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="absolute top-0 left-0 w-full pointer-events-none z-0"
       style={{ background: 'transparent' }}
     />
   )
