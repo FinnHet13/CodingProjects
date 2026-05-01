@@ -31,7 +31,7 @@ export default function HomePage() {
       <header className="border-b border-gray-800" relative z-10>
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="flex flex-col md:flex-row items-start gap-8">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 relative z-10">
               <Image
                 src="profile-pic.jpg"
                 alt="Profile Picture"
