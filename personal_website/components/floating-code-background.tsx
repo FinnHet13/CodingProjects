@@ -32,6 +32,14 @@ export default function FloatingCodeBackground() {
   // Constants for the animation
   const BASE_SPEED = 0.3 // Baseline speed snippets return to
   const SPEED_RETURN_FORCE = 0.01 // How quickly snippets return to baseline
+  
+  // Exclusion zone for the profile photo (top-left area)
+  const EXCLUSION_ZONE = {
+    x: 0,
+    y: 0,
+    width: 280,  // Covers the profile photo area
+    height: 280
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -134,10 +142,19 @@ export default function FloatingCodeBackground() {
         if (snippet.y < -50) snippet.y = canvas.height + 50
         if (snippet.y > canvas.height + 50) snippet.y = -50
 
-        // Draw snippet
-        ctx.font = `${snippet.size}px 'Courier New', monospace`
-        ctx.fillStyle = `rgba(59, 130, 246, ${snippet.opacity})` // Blue color
-        ctx.fillText(snippet.text, snippet.x, snippet.y)
+        // Check if snippet is in exclusion zone (profile photo area)
+        const inExclusionZone = 
+          snippet.x < EXCLUSION_ZONE.x + EXCLUSION_ZONE.width &&
+          snippet.x > EXCLUSION_ZONE.x - 50 &&
+          snippet.y < EXCLUSION_ZONE.y + EXCLUSION_ZONE.height &&
+          snippet.y > EXCLUSION_ZONE.y - 20
+
+        // Draw snippet only if not in exclusion zone
+        if (!inExclusionZone) {
+          ctx.font = `${snippet.size}px 'Courier New', monospace`
+          ctx.fillStyle = `rgba(59, 130, 246, ${snippet.opacity})` // Blue color
+          ctx.fillText(snippet.text, snippet.x, snippet.y)
+        }
       })
 
       animationRef.current = requestAnimationFrame(animate)
