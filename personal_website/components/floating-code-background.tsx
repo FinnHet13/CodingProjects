@@ -161,17 +161,36 @@ export default function FloatingCodeBackground() {
         if (snippet.y < -50) snippet.y = canvas.height + 50
         if (snippet.y > canvas.height + 50) snippet.y = -50
 
-        // Check if snippet is in exclusion zone (circular profile photo area)
+        // Check if snippet bounding box intersects with exclusion zone (circular profile photo area)
         const zone = exclusionZoneRef.current
-        const distToCenter = Math.sqrt(
-          Math.pow(snippet.x - zone.centerX, 2) + 
-          Math.pow(snippet.y - zone.centerY, 2)
-        )
-        const inExclusionZone = distToCenter < zone.radius
+        
+        // Measure the text to get its bounding box
+        ctx.font = `${snippet.size}px 'Courier New', monospace`
+        const textMetrics = ctx.measureText(snippet.text)
+        const textWidth = textMetrics.width
+        const textHeight = snippet.size // Approximate height based on font size
+        
+        // Define the four corners of the text bounding box
+        // Note: canvas text is drawn from (x, y) where y is the baseline
+        // So the box extends from (x, y - textHeight) to (x + textWidth, y)
+        const corners = [
+          { x: snippet.x, y: snippet.y - textHeight },           // top-left
+          { x: snippet.x + textWidth, y: snippet.y - textHeight }, // top-right
+          { x: snippet.x, y: snippet.y },                         // bottom-left
+          { x: snippet.x + textWidth, y: snippet.y }              // bottom-right
+        ]
+        
+        // Check if any corner is inside the circular exclusion zone
+        const inExclusionZone = corners.some(corner => {
+          const distToCenter = Math.sqrt(
+            Math.pow(corner.x - zone.centerX, 2) + 
+            Math.pow(corner.y - zone.centerY, 2)
+          )
+          return distToCenter < zone.radius
+        })
 
-        // Draw snippet only if not in exclusion zone
+        // Draw snippet only if no corner is in exclusion zone
         if (!inExclusionZone) {
-          ctx.font = `${snippet.size}px 'Courier New', monospace`
           ctx.fillStyle = `rgba(59, 130, 246, ${snippet.opacity})` // Blue color
           ctx.fillText(snippet.text, snippet.x, snippet.y)
         }
