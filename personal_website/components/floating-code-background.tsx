@@ -15,11 +15,18 @@ interface CodeSnippet {
   opacity: number
 }
 
+interface ExclusionZone {
+  centerX: number
+  centerY: number
+  radius: number
+}
+
 export default function FloatingCodeBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const snippetsRef = useRef<CodeSnippet[]>([])
   const mouseRef = useRef({ x: 0, y: 0 })
   const animationRef = useRef<number>()
+  const exclusionZoneRef = useRef<ExclusionZone>({ centerX: 0, centerY: 0, radius: 0 })
 
   // Sample code snippets to display
   const codeTexts = [
@@ -32,14 +39,6 @@ export default function FloatingCodeBackground() {
   // Constants for the animation
   const BASE_SPEED = 0.3 // Baseline speed snippets return to
   const SPEED_RETURN_FORCE = 0.01 // How quickly snippets return to baseline
-  
-  // Exclusion zone for the profile photo (top-left area)
-  const EXCLUSION_ZONE = {
-    x: 0,
-    y: 0,
-    width: 280,  // Covers the profile photo area
-    height: 280
-  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -64,6 +63,26 @@ export default function FloatingCodeBackground() {
     // Also resize when content changes (use MutationObserver)
     const observer = new MutationObserver(resizeCanvas)
     observer.observe(document.body, { childList: true, subtree: true })
+
+    // Function to update exclusion zone based on profile picture position
+    const updateExclusionZone = () => {
+      const profilePic = document.querySelector('img[alt="Profile Picture"]')
+      if (profilePic) {
+        const rect = profilePic.getBoundingClientRect()
+        const scrollY = window.scrollY
+        // Calculate center of the circular profile picture
+        exclusionZoneRef.current = {
+          centerX: rect.left + rect.width / 2,
+          centerY: rect.top + scrollY + rect.height / 2,
+          radius: Math.max(rect.width, rect.height) / 2 + 20 // Add padding
+        }
+      }
+    }
+    
+    // Update exclusion zone on resize and scroll
+    updateExclusionZone()
+    window.addEventListener('resize', updateExclusionZone)
+    window.addEventListener('scroll', updateExclusionZone)
 
     // Initialize code snippets - more snippets to cover full document height
     const initSnippets = () => {
@@ -142,12 +161,13 @@ export default function FloatingCodeBackground() {
         if (snippet.y < -50) snippet.y = canvas.height + 50
         if (snippet.y > canvas.height + 50) snippet.y = -50
 
-        // Check if snippet is in exclusion zone (profile photo area)
-        const inExclusionZone = 
-          snippet.x < EXCLUSION_ZONE.x + EXCLUSION_ZONE.width &&
-          snippet.x > EXCLUSION_ZONE.x - 50 &&
-          snippet.y < EXCLUSION_ZONE.y + EXCLUSION_ZONE.height &&
-          snippet.y > EXCLUSION_ZONE.y - 20
+        // Check if snippet is in exclusion zone (circular profile photo area)
+        const zone = exclusionZoneRef.current
+        const distToCenter = Math.sqrt(
+          Math.pow(snippet.x - zone.centerX, 2) + 
+          Math.pow(snippet.y - zone.centerY, 2)
+        )
+        const inExclusionZone = distToCenter < zone.radius
 
         // Draw snippet only if not in exclusion zone
         if (!inExclusionZone) {
@@ -163,6 +183,8 @@ export default function FloatingCodeBackground() {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
+      window.removeEventListener('resize', updateExclusionZone)
+      window.removeEventListener('scroll', updateExclusionZone)
       window.removeEventListener('mousemove', handleMouseMove)
       observer.disconnect()
       if (animationRef.current) {
