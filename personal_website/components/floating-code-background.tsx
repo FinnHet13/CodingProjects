@@ -74,7 +74,7 @@ export default function FloatingCodeBackground() {
         exclusionZoneRef.current = {
           centerX: rect.left + rect.width / 2,
           centerY: rect.top + scrollY + rect.height / 2,
-          radius: Math.max(rect.width, rect.height) / 2 + 20 // Add padding
+          radius: Math.max(rect.width, rect.height) / 2 // Exact radius of profile picture
         }
       }
     }
