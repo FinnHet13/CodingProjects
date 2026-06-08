@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs Search</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet'>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <!-- Top navigation bar: logo on the left, search input on the right -->
     <header id="main-header">
         <div class="header-content">
             <div class="logo">
                 <a class="navbar-brand" href="/">
-                    <i class="fas fa-briefcase"></i> 
+                    <i class="fas fa-briefcase"></i>
                     NOVA Job Searcher</a>
             </div>
             <div class="secondary-search-container">
@@ -33,14 +34,18 @@
             </div>
         </div>
     </header>
+
+    <!-- Plain-English overview of the searched job role (filled in by scripts.js) -->
     <div class="description-container">
         <div id="db-description" class="db-description"></div>
-    </div>  
+    </div>
 
+    <!-- Shows how many jobs were found for the current search term -->
     <div class="search-info-container">
         <p id="search-info">Loading jobs...</p>
     </div>
 
+    <!-- Checkboxes to filter results by job level (e.g. Entry Level, Internship) -->
     <div class="filter-container">
         <span class="filter-label">Level:</span>
         <label class="filter-chip"><input type="checkbox" class="job-level-filter" value="entry level"> Entry Level</label>
@@ -53,11 +58,13 @@
     </div>
 
     <main class="main-container">
+        <!-- Left column: scrollable list of job cards, loads more as you scroll down -->
         <section class="jobs-list-container">
             <div id="jobs-list"></div>
             <div id="loading-indicator" class="loading">Loading more jobs...</div>
         </section>
 
+        <!-- Right panel: full details of whichever job card was clicked -->
         <section id="job-detail-panel" class="job-detail-container">
             <div class="job-detail-content">
                 <button id="close-detail" class="close-btn">×</button>

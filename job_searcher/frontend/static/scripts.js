@@ -1,3 +1,5 @@
+// JavaScript code for the index.html page of the job search application. This script handles user interactions, fetches job data from the server, and updates the UI accordingly. It implements features such as searching for jobs, infinite scrolling, and displaying job details in a panel//
+
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const header = document.getElementById('main-header');
