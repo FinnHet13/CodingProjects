@@ -1,0 +1,34 @@
+job-searcher/
+├── app.py                              # Main application entry point
+├── logic.py                            # Business logic layer
+├── data.py                             # Data access layer
+├── .gitignore                          # Git ignore file
+├── LICENSE                             # MIT License file
+├── README.md                           # Project documentation
+├── requirements.txt                    # Python dependencies
+├── environment.yml                     # Conda environment file
+├── Project_proposal_final.pdf          # Project proposal
+├── Project_Report_final.pdf            # Project report
+│
+├── backend/                            # Backend components
+│   ├── __init__.py
+│   ├── job_descriptions.db             # SQLite database with Lightcast Skills API job descriptions
+│   └── tests/                          # Backend tests
+│       ├── __init__.py
+│       ├── test_query.py               # Tests if different search queries produce desired result
+│       └── test_sheets_api.py          # Test script for Google Sheets API module
+│
+├── frontend/                           # Frontend components
+│   ├── static/                         
+│   │   ├── scripts.js                  # JavaScript code
+│   │   └── styles.css                  # CSS styles
+│   └── templates/                      # HTML templates
+│       ├── analytics.html              # Home Page/Analytics dashboard view
+│       └── index.html                  # Main job search view
+│
+├── scripts/                            # Utility scripts 
+│   └── scrape_jobs.py                  # Job scraping script (use for up-to-date querying in future)
+│   └── jobs.csv                        # CSV of most current scraped jobs    
+│
+├── archive/                       
+│   └── Search_with_SQL_Databases.pdf   # Search algorithm idea using SQL databases

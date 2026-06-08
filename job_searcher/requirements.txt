@@ -1,0 +1,7 @@
+flask
+flask-cors
+rank-bm25
+pandas
+pydantic
+pytest
+setuptools

@@ -1,0 +1,12 @@
+name: job_scraper
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - flask
+  - flask-cors
+  - rank-bm25
+  - pandas
+  - pydantic
+  - pytest
+  - setuptools

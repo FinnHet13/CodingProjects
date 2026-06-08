@@ -1,0 +1,696 @@
+/* Global reset - Removes default margins, paddings and ensures proper box sizing across browsers */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base body styles - Sets font, background color, text color and line spacing */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #daedef; /* Light blue-green background */
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+/* Heading style for custom headers */
+.custom-heading {
+    color: #202d3a;
+    font-weight: bold;
+}
+
+/* Creates vertical spacing between container elements */
+.container {
+    margin-top: 30px;
+}
+
+/* Styling for chart containers on analytics page - White card with rounded corners and shadow */
+.chart-container {
+    background-color: white;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Ensures Plotly graphs use the full container dimensions */
+.chart-container .plotly-graph-div {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Top navigation bar styles - White background with bottom border */
+.navbar {
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+/* App name/logo text style in navbar */
+.navbar .navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Spacing for icon in navbar */
+.navbar .navbar-brand i {
+    margin-right: 10px;
+}
+
+/* Container for the logo element - Centers content vertically */
+.logo {
+    display: flex;
+    align-items: center; /* Align the icon and text vertically */
+}
+
+/* Styling for the app brand/name in navbar - Combines icon and text */
+.navbar-brand {
+    font-size: 20px; 
+    font-weight: bold; 
+    color: #333;      
+    text-decoration: none; 
+    display: flex;
+    align-items: center; 
+}
+
+/* Icon styling in the navbar */
+.navbar-brand i {
+    margin-right: 8px;  
+    font-size: 20px;    
+    color: #333;    
+}
+
+/* Button style in navbar - Blue rounded button */
+.navbar .btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 20px;
+}
+
+/* Back arrow for navigation */
+.go-back-arrow {
+    font-size: 1.5rem;
+    color: #007bff;
+    cursor: pointer;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .chart-container {
+        margin-bottom: 10px;
+    }
+}
+
+/* Main title section - Centered with vertical spacing */
+.title-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Main page heading - Large, bold, dark blue text */
+.title-container h1 {
+    font-size: 3rem;
+    color: #223242;
+    font-weight: bold;
+}
+
+/* Subtitle text styles */
+.title-container p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Main search box container - White rounded card with shadow */
+.search-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+/* Search input field - Rounded with max width */
+.search-container input {
+    border-radius: 20px;
+    max-width: 400px;
+}
+
+/* Search button - Rounded with left margin */
+.search-container button {
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+/* Fixed header that stays at top of screen - White background with z-index to stay on top */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 100;
+    transition: box-shadow 0.3s ease;
+    padding: 15px 0;
+}
+
+/* Shadow effect for header when page is scrolled */
+#main-header.scrolled {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for header elements - Uses flexbox for layout */
+.header-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Right margin for logo in header */
+.logo {
+    margin-right: 20px;
+}
+
+/* Secondary search box in header - Grows to fill available space with max width */
+.secondary-search-container {
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+/* Form inside secondary search - Pill-shaped with border */
+.secondary-search-container form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    padding: 0 15px;
+    height: 44px;
+}
+
+/* Container for search input and clear button - Flexbox layout */
+.search-input-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/* Input field in secondary search - No border, fills container */
+#secondary-search-input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    height: 100%;
+    font-size: 16px;
+}
+
+/* Clear button (X) in search field - Hidden by default, shows when text entered */
+.clear-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    color: #70757a;
+    display: none;
+    margin-right: 5px;
+}
+
+/* Search button with magnifying glass icon - Blue color */
+#secondary-search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #4285f4;
+    padding: 0 5px;
+}
+
+/* Container for search result info text - Positions below fixed header */
+.search-info-container {
+    margin-top: 48px;
+    padding: 15px 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Container for job descriptions - White card with shadow */
+.description-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-top: 70px; /* Space below header */
+    margin-left: auto;
+    margin-right: auto; 
+    margin-bottom: 0; 
+    max-width: 1200px;
+    padding: 15px 20px;
+    min-height: 70px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box; /* Includes padding in width calculation */
+}
+
+/* Header for search description section */
+.search-description-header {
+    font-size: 19px;
+    color: black;
+    font-weight: bold;
+}
+
+/* Job description text styling - Scrollable with max height */
+.db-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4a4a4a;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Headers within job descriptions */
+.db-description h2,
+.db-description h3 {
+    margin: 10px 0 5px;
+    color: #1a73e8;
+    font-size: 16px;
+}
+
+/* Paragraphs within job descriptions */
+.db-description p {
+    margin-bottom: 8px;
+}
+
+/* Lists within job descriptions */
+.db-description ul,
+.db-description ol {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+/* Search result count information text - Gray smaller text */
+#search-info {
+    font-size: 14px;
+    color: #70757a;
+}
+
+/* Filter bar for job level chips */
+.filter-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 1200px;
+    margin: 0 auto 10px;
+    padding: 0;
+}
+
+.filter-label {
+    font-size: 13px;
+    color: #70757a;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    padding: 4px 12px;
+    background-color: #f1f3f4;
+    border-radius: 16px;
+    color: #4a4a4a;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.filter-chip:hover {
+    background-color: #e8f0fe;
+    border-color: #1a73e8;
+}
+
+.filter-chip input[type="checkbox"] {
+    display: none;
+}
+
+.filter-chip:has(input:checked) {
+    background-color: #e8f0fe;
+    border-color: #1a73e8;
+    color: #1a73e8;
+    font-weight: 500;
+}
+
+/* Main container for job listings and details - Flexbox layout */
+.main-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 0 20px;
+    gap: 20px;
+    height: calc(100vh - 130px); /* Full height minus header space */
+}
+
+/* Container for job listings - Left panel with scroll */
+.jobs-list-container {
+    flex: 0 0 40%; /* Fixed width at 40% of container */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+/* Container for job list items - Adds vertical padding */
+#jobs-list {
+    padding: 10px 0;
+}
+
+/* Individual job card - Bottom border, hover effect */
+.job-card {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover effect on job cards - Light blue background */
+.job-card:hover {
+    background-color: #f0f7ff;
+}
+
+/* Selected job card - Blue left border and background */
+.job-card.selected {
+    background-color: #e8f0fe;
+    border-left: 4px solid #1a73e8;
+}
+
+/* Header section of job card - Contains logo and title */
+.job-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+/* Company logo in job card */
+.job-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+    object-fit: contain;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+/* Job title text - Blue, semi-bold */
+.job-title {
+    font-weight: 500;
+    color: #1a0dab;
+    margin-bottom: 4px;
+    font-size: 16px;
+}
+
+/* Company name text */
+.job-company {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+/* Job location text - Gray */
+.job-location {
+    font-size: 14px;
+    color: #70757a;
+}
+
+/* Container for job tags - Flex layout with wrapping */
+.job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* Individual job tag - Pill shape with gray background */
+.job-tag {
+    font-size: 12px;
+    padding: 3px 8px;
+    background-color: #f1f3f4;
+    border-radius: 12px;
+    color: #4a4a4a;
+}
+
+/* 'New' tag with special styling - Blue background */
+.job-tag.new {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    font-weight: 500;
+}
+
+/* Source information for job listing - Small gray text */
+.job-source {
+    font-size: 12px;
+    color: #70757a;
+    margin-top: 6px;
+}
+
+/* Link in job source text - Blue color */
+.job-source a {
+    color: #1a0dab;
+    text-decoration: none;
+}
+
+/* Job detail panel - Right side container for expanded job info */
+.job-detail-container {
+    flex: 0 0 60%; /* Fixed width at 60% of container */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    position: relative;
+    width: auto;
+    max-width: 720px;
+    height: 100%;
+    z-index: 90;
+    margin: 0;
+    padding: 0; 
+    display: none; /* Hidden by default */
+}
+
+/* Show detail panel when state is active */
+.job-detail-container.active {
+    display: block; 
+}
+
+/* Content wrapper inside detail panel */
+.job-detail-content {
+    padding: 20px;
+    position: relative;
+}
+
+/* Close button for detail panel - Top right X button */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #70757a;
+}
+
+/* Header section in job detail panel - Logo and title */
+.detail-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-right: 30px;
+}
+
+/* Company logo in detail panel - Larger than in job card */
+.detail-logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Job title in detail panel - Blue, larger text */
+.detail-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a0dab;
+    margin-bottom: 5px;
+}
+
+/* Company name in detail panel */
+.detail-company {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Job location in detail panel */
+.detail-location {
+    font-size: 14px;
+    color: #70757a;
+}
+
+/* Container for job metadata in detail panel - Flexbox with wrapping */
+.detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+/* Individual metadata item - Light blue background pills */
+.detail-meta-item {
+    background-color: rgba(218, 237, 239, 0.8) !important; /* Semi-transparent light blue */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #333;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Job description text in detail panel - Preserves line breaks */
+.detail-description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 10px;
+    white-space: pre-line; /* Preserves line breaks in job description */
+}
+
+/* Headers in job description */
+.detail-description h2,
+.detail-description h3 {
+    margin: 15px 0 8px;
+}
+
+/* Paragraphs in job description */
+.detail-description p {
+    margin-bottom: 12px;
+}
+
+/* Lists in job description */
+.detail-description ul,
+.detail-description ol {
+    margin-left: 20px;
+    margin-bottom: 12px;
+}
+
+/* Loading indicator for infinite scroll - Hidden by default */
+.loading {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    color: #70757a;
+    display: none;
+}
+
+/* Container for Apply Now button in job detail */
+.detail-source {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Apply Now button style - Light blue with border */
+.detail-source button {
+    background-color: #daedef !important;
+    border: 2px solid #4a4a4a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover effect for Apply Now button - Darker blue */
+.detail-source button:hover {
+    background-color: #c0d6d9;
+    border-color: #333;
+}
+
+/* Mobile responsive styles for screens up to 768px wide */
+@media (max-width: 768px) {
+    /* Main container adjustments for mobile - Full width layout */
+    .main-container {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0;
+        gap: 0;
+        height: calc(100vh - 130px);
+    }
+
+    /* Job list container for mobile - Full width with no margins */
+    .jobs-list-container {
+        flex: 0 0 40%;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Job detail container for mobile - No need for sliding animation */
+    .job-detail-container {
+        flex: 0 0 60%;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        position: relative;
+        width: auto;
+        max-width: 720px;
+        height: 100%;
+        z-index: 90;
+        margin: 0;
+        padding: 0; 
+        display: none;
+    }
+
+    /* Active state for detail panel on mobile - Just display it */
+    .job-detail-container.active {
+        display: block;
+    }
+
+    /* Detail content padding for mobile */
+    .job-detail-content {
+        padding: 20px;
+        position: relative;
+    }
+
+    /* Close button positioning for mobile */
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #70757a;
+    }
+}
+
+
+
+
+
