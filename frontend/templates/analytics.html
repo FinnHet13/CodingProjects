@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA Job Searcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for the arrow icon -->
+<style>
+    body {
+        background-color: #daedef; 
+    }
+</style>
+</head>
+<body>
+                <!-- Toolbar with "NOVA Job Searcher" on the top left -->
+            <nav class="navbar">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-briefcase"></i> 
+                    NOVA Job Searcher</a>
+            </nav>
+
+            <!-- Title and Subheader Section -->
+            <div class="container title-container">
+                <h1>Find Your Dream Job Today</h1>
+                <p>Search by job title, location, or company through thousands of job listings to find your perfect match</p>
+            </div>
+
+            <!-- Search Bar Section -->
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-12">
+                        <form id="searchForm" action="{{ url_for('index_post') }}" method="get" class="search-container d-flex justify-content-center">
+                            <input type="text" class="form-control" placeholder="Search for jobs..." id="jobSearchInput" name="search_term">
+                            <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <div class="container">
+
+        <div class="row">
+            <!-- Chart 1: Number of Jobs by Search Term -->
+            <div class="col-md-6">
+                <div class="chart-container" id="search_term_chart"></div>
+            </div>
+
+            <!-- Chart 2: Pie chart of is_remote -->
+            <div class="col-md-6">
+                <div class="chart-container" id="is_remote_chart"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Chart 3: Number of Jobs by Company Industry -->
+            <div class="col-md-6">
+                <div class="chart-container" id="company_industry_chart"></div>
+            </div>
+
+            <!-- Chart 4: Job Postings Over Time -->
+            <div class="col-md-6">
+                <div class="chart-container" id="job_posted_over_time_chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script>
+        // Chart 1: Number of Jobs by Search Term (Top 5)
+        var searchTermData = JSON.parse('{{ search_term_count | tojson | safe }}');
+        var searchTermChart = {
+            x: Object.keys(searchTermData),
+            y: Object.values(searchTermData),
+            type: 'bar',
+            marker: {
+                color: ['#4db8ff', '#00bfae', '#6a5abd','#8a4be7', '#ffa5d4'] 
+            }
+        };
+        var layoutSearchTerm = { 
+            title: 'Top 5 Search Terms by Number of Jobs',
+            font: { size: 12 },  
+            xaxis: {
+                    tickangle: 20,
+                    tickfont: {
+                        size: 10 
+                    }
+                }
+        };
+        Plotly.newPlot('search_term_chart', [searchTermChart], layoutSearchTerm);
+
+        // Chart 2: Pie chart of is_remote
+        var isRemoteData = JSON.parse('{{ is_remote_count | tojson | safe }}');
+        // Map old values to new labels
+        var mappedLabels = Object.keys(isRemoteData).map(function(key) {
+            if (key == "TRUE") return "Remote";
+            if (key == "FALSE") return "In-office";
+            if (key == 0) return "Not Specified";
+            return key; 
+        });
+
+        var isRemoteChart = {
+            labels: mappedLabels, // Use the mapped labels instead of original keys
+            values: Object.values(isRemoteData),
+            type: 'pie',
+            marker: {
+                colors: ['#4db8ff', '#00bfae', '#6a5acd', '#ff8c00', '#d2691e', '#8a2be2']
+            }
+        };
+        var layoutIsRemote = { title: 'Remote vs Non-Remote Jobs' };
+        Plotly.newPlot('is_remote_chart', [isRemoteChart], layoutIsRemote);
+
+        // Chart 3: Number of Jobs by Company Industry (Top 5)
+        var companyIndustryData = JSON.parse('{{ company_industry_count | tojson | safe }}');
+        // Filter out industries with empty names and job counts greater than 0
+        var filteredIndustries = Object.entries(companyIndustryData)
+            .filter(([industry, count]) => industry.trim() !== "" && count > 0) // Exclude empty industry names
+            .sort((a, b) => b[1] - a[1]) // Sort by job count in descending order
+            .slice(0, 5); // Get the top 5 industries
+
+        var companyIndustryChart = {
+            x: filteredIndustries.map(item => item[0]), // Industry names
+            y: filteredIndustries.map(item => item[1]), // Job counts
+            type: 'bar',
+            marker: {
+                color: ['#4db8ff', '#00bfae', '#6a5acd', '#ff6f61', '#ffb3c1']
+            }
+        };
+        var layoutCompanyIndustry = { 
+                title: 'Top 5 Industries with Most Jobs',
+                font: { size: 12 },  // Set font size for all elements
+                xaxis: {
+                    tickangle: 20,
+                    tickfont: {
+                        size: 7 
+                    }
+                }
+            };
+        Plotly.newPlot('company_industry_chart', [companyIndustryChart], layoutCompanyIndustry);
+
+        // Chart 4: Job Postings Over Time (Past 14 Days)
+        var jobPostedData = JSON.parse('{{ job_posted_over_time | tojson | safe }}');
+        var cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - 14);
+
+        var filteredJobPostedData = {};
+        for (var date in jobPostedData) {
+            if (new Date(date) >= cutoff) {
+                filteredJobPostedData[date] = jobPostedData[date];
+            }
+        }
+
+        var jobPostedChart = {
+            x: Object.keys(filteredJobPostedData),
+            y: Object.values(filteredJobPostedData),
+            type: 'scatter',
+            mode: 'lines+markers',
+            line: {
+                color: '#4db8ff'
+            }
+        };
+        var layoutJobPosted = { title: 'Job Postings Over Time (Past 14 Days)' };
+        Plotly.newPlot('job_posted_over_time_chart', [jobPostedChart], layoutJobPosted);
+    </script>
+</body>
+</html>

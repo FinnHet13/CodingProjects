@@ -1,0 +1,3 @@
+[submodule "data_scraper/data_scraper"]
+	path = data_scraper/data_scraper
+	url = https://github.com/cullenwatson/JobSpy.git
