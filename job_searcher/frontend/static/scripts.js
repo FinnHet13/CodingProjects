@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             <h5>Job Description</h5>
             <div class="detail-description">
-                ${jobData.description || 'No description available'}
+                ${jobData.description ? marked.parse(jobData.description) : 'No description available'}
             </div>
         `;
         

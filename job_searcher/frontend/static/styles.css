@@ -229,13 +229,14 @@ body {
     padding: 0 5px;
 }
 
-/* Container for search result info text - Positions below fixed header */
+/* Container for search result info text */
 .search-info-container {
-    margin-top: 48px;
-    padding: 15px 0;
+    margin-top: 0;
+    padding: 5px 0;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    flex-shrink: 0;
 }
 
 /* Container for job descriptions - White card with shadow */
@@ -243,16 +244,17 @@ body {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    margin-top: 70px; /* Space below header */
+    margin-top: 0; /* body padding-top clears the fixed header */
     margin-left: auto;
-    margin-right: auto; 
-    margin-bottom: 0; 
+    margin-right: auto;
+    margin-bottom: 0;
     max-width: 1200px;
     padding: 15px 20px;
     min-height: 70px;
     display: block;
     width: 100%;
     box-sizing: border-box; /* Includes padding in width calculation */
+    flex-shrink: 0;
 }
 
 /* Header for search description section */
@@ -306,6 +308,7 @@ body {
     max-width: 1200px;
     margin: 0 auto 10px;
     padding: 0;
+    flex-shrink: 0;
 }
 
 .filter-label {
@@ -349,11 +352,13 @@ body {
 /* Main container for job listings and details - Flexbox layout */
 .main-container {
     display: flex;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 0 20px;
+    padding: 0 0 10px;
     gap: 20px;
-    height: calc(100vh - 130px); /* Full height minus header space */
+    flex: 1;
+    min-height: 0; /* allows flex child to shrink below content size */
 }
 
 /* Container for job listings - Left panel with scroll */
@@ -467,7 +472,7 @@ body {
 
 /* Job detail panel - Right side container for expanded job info */
 .job-detail-container {
-    flex: 0 0 60%; /* Fixed width at 60% of container */
+    flex: 1; /* Fill remaining space after left panel + gap */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -633,7 +638,8 @@ body {
         margin: 0 auto;
         padding: 0;
         gap: 0;
-        height: calc(100vh - 130px);
+        flex: 1;
+        min-height: 0;
     }
 
     /* Job list container for mobile - Full width with no margins */
@@ -651,7 +657,7 @@ body {
 
     /* Job detail container for mobile - No need for sliding animation */
     .job-detail-container {
-        flex: 0 0 60%;
+        flex: 1;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);

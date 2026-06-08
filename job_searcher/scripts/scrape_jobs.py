@@ -1,5 +1,6 @@
 import pandas as pd
 import csv
+import re
 from jobspy import scrape_jobs
 import time
 
@@ -27,6 +28,52 @@ spain_search_terms = english_search_terms + [
     "Inteligencia de Negocios",
     "Consultoría de TI"
 ]
+
+
+def clean_description(text):
+    if not isinstance(text, str) or not text.strip():
+        return ""
+    # Remove backslash escapes before punctuation (scraping artifacts like \- \& \*)
+    text = re.sub(r'\\([*_\[\](){}#+\-.!|>\\])', r'\1', text)
+    # Normalize 2+ newlines to a single blank line (paragraph separator)
+    text = re.sub(r'\n{2,}', '\n\n', text)
+
+    # Merge mid-sentence paragraph breaks caused by HTML-to-text conversion.
+    # Each HTML <p> tag becomes \n\n in the scraped text, splitting sentences like
+    # "As a\n\nSenior Data Scientist". We join a paragraph onto the previous one
+    # when the previous line doesn't end a sentence AND the next block isn't a
+    # Markdown structural element (header, list item, blockquote, or bold header).
+    paragraphs = text.split('\n\n')
+    merged = []
+    buffer = None
+
+    for para in paragraphs:
+        para = para.strip()
+        if not para:
+            continue
+        if buffer is None:
+            buffer = para
+            continue
+
+        last_line = buffer.splitlines()[-1].rstrip()
+        first_line = para.splitlines()[0].lstrip()
+
+        ends_sentence = bool(re.search(r'[.!?:]\s*$', last_line))
+        starts_structure = bool(re.match(
+            r'^(#{1,6} |[*\-+] |\d+\. |>|\*\*.+\*\*\s*$)',
+            first_line
+        ))
+
+        if ends_sentence or starts_structure:
+            merged.append(buffer)
+            buffer = para
+        else:
+            buffer = buffer + ' ' + para
+
+    if buffer:
+        merged.append(buffer)
+
+    return '\n\n'.join(merged)
 
 
 def safe_concat(df_list):
@@ -119,6 +166,7 @@ if not all_jobs.empty:
     ]
     all_jobs = all_jobs.drop(columns=columns_to_drop, errors='ignore')
     all_jobs = all_jobs.drop_duplicates(subset=["title", "company"], keep="first")
+    all_jobs["description"] = all_jobs["description"].apply(clean_description)
 
     csv_path = "scripts/jobs.csv"
     all_jobs.to_csv(csv_path, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\", index=False)
