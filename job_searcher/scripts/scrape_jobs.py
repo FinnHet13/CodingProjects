@@ -5,7 +5,7 @@ from jobspy import scrape_jobs
 import time
 
 # ---- Scraping settings ----
-RESULTS_WANTED = 50   # results per search term per site
+RESULTS_WANTED = 100   # results per search term per site
 HOURS_OLD      = 336  # only include jobs posted in the last 14 days
 SLEEP_SECONDS  = 2    # pause between requests to avoid rate limiting
 
