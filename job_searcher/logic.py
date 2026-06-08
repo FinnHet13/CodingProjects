@@ -6,26 +6,42 @@ import pandas as pd
 import sqlite3
 from data import CsvJobClient
 
-# Constants - Configure paths
+# Constants - Configure important paths to job data in jobs.csv and job descriptions from 
+# Lightcast API in job_descriptions.db
 CSV_PATH = os.path.join(os.path.dirname(__file__), 'scripts', 'jobs.csv')
 DB_PATH = os.path.join(os.path.dirname(__file__), 'backend', 'job_descriptions.db')
 
-# Module-level singleton: load the CSV once at startup and reuse across all requests
+# Two variables initialised to None here so they exist at module scope before any function runs.
+# Both are assigned their real values in the following functions.
+# _csv_client will hold the loaded CsvJobClient instance (CSV in memory + BM25 search index).
+# _csv_mtime will hold the jobs.csv modification timestamp from when that load happened,
+# so get_csv_client() can detect that the "Daily Job Update" Task Scheduler task has
+# overwritten jobs.csv with the new jobs and a reload can be triggered without
+# needing to restart the Flask app.
 _csv_client = None
+_csv_mtime = None
 
 def get_csv_client():
     """
     Get or create the CsvJobClient instance.
-    
-    The CSV data is loaded once into memory on first call and reused
-    for all subsequent requests. This avoids re-reading the file on every request.
-    
+
+    On first call, the full CSV is loaded into memory and a BM25 search index is built.
+    That in-memory copy is reused for every subsequent request (no file reads per request).
+
+    On each call, the file's modification time is checked against when it was last loaded.
+    If jobs.csv has changed since the last load, the CSV and index are rebuilt in memory.
+    This allows the app to automatically serve the latest job listings after the
+    "Daily Job Update" Windows Task Scheduler task runs scrape_jobs.py each morning,
+    without requiring a manual Flask app restart.
+
     Returns:
         CsvJobClient: The singleton client instance
     """
-    global _csv_client
-    if _csv_client is None:
+    global _csv_client, _csv_mtime
+    current_mtime = os.path.getmtime(CSV_PATH)
+    if _csv_client is None or current_mtime != _csv_mtime:
         _csv_client = CsvJobClient(csv_path=CSV_PATH)
+        _csv_mtime = current_mtime
     return _csv_client
 
 def search_jobs(search_term, job_levels=None):
