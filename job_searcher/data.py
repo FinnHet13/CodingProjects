@@ -5,18 +5,14 @@ Consolidated Data Access Layer:
 
 CsvJobClient Module Explanation:
     query_by_search_term():
-    1. Fuzzy Matching:
-        * Uses fuzzywuzzy to handle typos and partial matches. For example, "Data Sciene" will match "Data Science".
-        * fuzz.partial_ratio is used to calculate similarity scores, with a threshold (min_score) to filter out low-relevance matches.
+    1. Search jobs via BM25 to allow for flexible queries:
+        * The search term is matched against multiple fields in the job data, including title, company, location, search_term, and country. This allows for flexible queries like "Germany Data Analyst" to match jobs with "Data Analyst" in the title and "Germany" in the location.
     2. Synonym Handling:
         * A SYNONYMS dictionary maps terms to their synonyms. For example, searching for "Analytics" will also match "Data Science".
         * The _get_synonyms method retrieves synonyms for the search term.
-    3. Flexible Search:
-        * The _calculate_match_score method searches across all fields (title, company, location, search_term).
-        * Scores are weighted: exact matches are highest, synonym matches are slightly lower, and fuzzy matches are weighted even lower.
-    4. Text Normalization:
+    3. Text Normalization:
         * The _normalize_text method ensures consistent matching by lowercasing and removing extra whitespace.
-    5. Efficiency:
+    4. Efficiency:
         * Data is loaded once at startup from the CSV file and cached in memory.
         * Results are ranked by relevance using a scoring system.
 """

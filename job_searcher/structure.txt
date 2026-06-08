@@ -13,10 +13,11 @@ job-searcher/
 ├── backend/                            # Backend components
 │   ├── __init__.py
 │   ├── job_descriptions.db             # SQLite database with Lightcast Skills API job descriptions
+│   ├── description.csv                 # CSV with Lightcast Skills API job descriptions
 │   └── tests/                          # Backend tests
 │       ├── __init__.py
 │       ├── test_query.py               # Tests if different search queries produce desired result
-│       └── test_sheets_api.py          # Test script for Google Sheets API module
+│       └── test_csv_client.py          # Test loading in jobs from CSV
 │
 ├── frontend/                           # Frontend components
 │   ├── static/                         

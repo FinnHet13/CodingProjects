@@ -15,7 +15,7 @@ _csv_client = None
 
 def get_csv_client():
     """
-    Get or create the singleton CsvJobClient instance.
+    Get or create the CsvJobClient instance.
     
     The CSV data is loaded once into memory on first call and reused
     for all subsequent requests. This avoids re-reading the file on every request.

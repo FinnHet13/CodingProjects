@@ -14,7 +14,7 @@
 </style>
 </head>
 <body>
-                <!-- Toolbar with "NOVA Job Searcher" on the top left -->
+            <!-- Toolbar with "NOVA Job Searcher" on the top left -->
             <nav class="navbar">
                 <a class="navbar-brand" href="/">
                     <i class="fas fa-briefcase"></i> 
@@ -47,7 +47,7 @@
                 <div class="chart-container" id="search_term_chart"></div>
             </div>
 
-            <!-- Chart 2: Pie chart of is_remote -->
+            <!-- Chart 2: Pie chart of Remote/On-site job proportions -->
             <div class="col-md-6">
                 <div class="chart-container" id="is_remote_chart"></div>
             </div>
@@ -70,7 +70,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <script>
-        // Chart 1: Number of Jobs by Search Term (Top 5)
+        // Chart 1: Number of Jobs by Search Term
         var searchTermData = JSON.parse('{{ search_term_count | tojson | safe }}');
         var searchTermChart = {
             x: Object.keys(searchTermData),
