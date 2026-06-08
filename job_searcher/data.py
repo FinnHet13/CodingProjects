@@ -1,32 +1,19 @@
 """
-Consolidated Data Access Layer:
-1. CSV-based job data ingestion - For retrieving job data from a local CSV file
-2. Job Description API functionality - For retrieving job descriptions from external API
+Data Access Layer - reads job listings from a local CSV file.
 
-CsvJobClient Module Explanation:
-    query_by_search_term():
-    1. Search jobs via BM25 to allow for flexible queries:
-        * The search term is matched against multiple fields in the job data, including title, company, location, search_term, and country. This allows for flexible queries like "Germany Data Analyst" to match jobs with "Data Analyst" in the title and "Germany" in the location.
-    2. Synonym Handling:
-        * A SYNONYMS dictionary maps terms to their synonyms. For example, searching for "Analytics" will also match "Data Science".
-        * The _get_synonyms method retrieves synonyms for the search term.
-    3. Text Normalization:
-        * The _normalize_text method ensures consistent matching by lowercasing and removing extra whitespace.
-    4. Efficiency:
-        * Data is loaded once at startup from the CSV file and cached in memory.
-        * Results are ranked by relevance using a scoring system.
+CsvJobClient is the main class here. It:
+    1. Loads jobs.csv into memory once at startup
+    2. Builds a BM25 search index over job titles, companies, locations, and countries
+    3. Expands search queries with synonyms (e.g. "Analytics" also matches "Data Science")
+    4. Returns ranked results for any search term or location query
 """
-import os
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field, validator
 import pandas as pd
 from rank_bm25 import BM25Okapi
 import numpy as np
 import re
-import requests
-import sqlite3
-
-# ==== Sheet API Module Constants ====
+# ==== Search Constants ====
 
 # Synonym dictionary for search term matching
 SYNONYMS = {
@@ -105,68 +92,7 @@ SYNONYMS = {
 
 # ==== Description API Module Constants ====
 
-JOB_TITLES = [
-    "Data Scientist",
-    "Business Analyst",
-    "Software Engineer",
-    "Product Manager",
-    "Data Engineer",
-    "Machine Learning Engineer",
-    "Data Analyst",
-    "Business Intelligence Analyst",
-    "Project Manager",
-    "DevOps Engineer",
-    "Big Data Engineer",
-    "Business Systems Analyst",
-    "Data Architect"
-]
-
-JOB_SYNONYMS = {
-    # Software
-    "Junior Software Developer": "Software Development",
-    "Senior Software Developer": "Software Development",
-    "Software Developer": "Software Development",
-    "Software Development Engineer": "Software Development",
-    
-    # Data Science
-    "Junior Data Scientist": "Data Science",
-    "Senior Data Scientist": "Data Science",
-    "Data Scientist": "Data Science",
-    
-    # Machine Learning
-    "Junior Machine Learning Engineer": "Machine Learning",
-    "Machine Learning Engineer": "Machine Learning",
-    
-    # Data Analysis
-    "Junior Data Analyst": "Data Analysis",
-    "Data Analyst": "Data Analysis",
-    
-    # Business Analyst terms added
-    "Junior Business Analyst": "Business Analysis",
-    "Senior Business Analyst": "Business Analysis",
-    "Business Analyst": "Business Analysis",
-    
-    # Trainee positions
-    "Trainee Software Developer": "Software Development",
-    "Trainee Data Scientist": "Data Science",
-    "Trainee Machine Learning Engineer": "Machine Learning",
-    "Trainee Data Analyst": "Data Analysis",
-    "Trainee Business Analyst": "Business Analysis",
-    "Traineeship Software Developer": "Software Development",
-    "Traineeship Data Scientist": "Data Science",
-    "Traineeship Machine Learning Engineer": "Machine Learning",
-    "Traineeship Data Analyst": "Data Analysis",
-    "Traineeship Business Analyst": "Business Analysis",
-
-    # Full-time positions
-    "Full-time Software Developer": "Software Development",
-    "Full-time Data Scientist": "Data Science",
-    "Full-time Machine Learning Engineer": "Machine Learning",
-    "Full-time Data Analyst": "Data Analysis",
-    "Full-time Business Analyst": "Business Analysis",
-}
-
-# ==== Sheet API Module Classes ====
+# ==== Classes ====
 
 class JobListing(BaseModel):
     """Pydantic model for job listing data"""
@@ -314,161 +240,3 @@ class CsvJobClient:
             count=len(job_listings),
             jobs=job_listings
         )
-
-# ==== Skills API Module Functions ====
-
-def get_access_token():
-    """
-    Get access token from EMSI Lightcast Skills API.
-    
-    Makes an HTTP request to the EMSI Lightcast auth endpoint to retrieve an OAuth access token
-    for subsequent API calls.
-    
-    Returns:
-        str or None: The access token if successful, None otherwise
-    """
-    url = "https://auth.emsicloud.com/connect/token"
-    payload = "client_id=11upn5xpu4dikqe3&client_secret=FVBb8tWw&grant_type=client_credentials&scope=emsi_open"
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    
-    response = requests.request("POST", url, data=payload, headers=headers)
-    
-    if response.status_code == 200:
-        return response.json().get('access_token')
-    else:
-        print(f"Error getting token: {response.status_code}")
-        print(response.text)
-        return None
-
-def get_skills_for_job(job_title):
-    """
-    Get skills and description for a job title using EMSI Lightcast Skills API.
-    
-    This function uses the EMSI Lightcast Skills API to extract skills associated with a job title 
-    and retrieves a description. If no specific skills are found, it returns a general
-    message.
-    
-    Args:
-        job_title (str): The job title to retrieve skills for
-        
-    Returns:
-        str: A description of the job skills or an error message
-    """
-    # Check if the job title exists in the synonym dictionary
-    job_title = JOB_SYNONYMS.get(job_title, job_title)  # Use synonym if available
-
-    # Get access token
-    token = get_access_token()
-    if not token:
-        return "Error: Unable to authenticate with API"
-    
-    # URL for the API endpoint
-    url = "https://emsiservices.com/skills/versions/latest/extract"
-    
-    # Request payload with job title
-    payload = {
-        "text": job_title
-    }
-
-    # Header with API token
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json"
-    }
-
-    # Send API request
-    response = requests.post(url, json=payload, headers=headers)
-
-    # Check if request was successful
-    if response.status_code == 200:
-        data = response.json()
-        # If no specific skills are found, return a general description of the job title
-        if data.get("data"):
-            # Return the domain description if skills are found
-            description = data["data"][0]["skill"]["description"]
-        else:
-            # If no skills, return the job domain description
-            description = f"No specific skills found for {job_title}"
-        return description
-    else:
-        print(f"Error: {response.status_code}")
-        return f"Error fetching description for {job_title}"
-
-def save_job_skills_to_db(job_titles, db_file="backend/job_descriptions.db"):
-    """
-    Save job descriptions to SQLite database.
-    
-    Creates a SQLite database and table if they don't exist, then fetches and stores
-    descriptions for each job title using the EMSI Lightcase Skills API.
-    
-    Args:
-        job_titles (list): List of job titles to fetch descriptions for
-        db_file (str): Path to the SQLite database file
-        
-    Returns:
-        None
-    """
-    # Connect to SQLite database (or create it if it doesn't exist)
-    os.makedirs(os.path.dirname(db_file), exist_ok=True)
-    conn = sqlite3.connect(db_file)
-    cursor = conn.cursor()
-
-    # Create table if it doesn't exist
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS job_descriptions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            job_title TEXT NOT NULL,
-            description TEXT
-        )
-    ''')
-
-    # Insert job descriptions into the table
-    for job_title in job_titles:
-        description = get_skills_for_job(job_title)
-        cursor.execute('''
-            INSERT INTO job_descriptions (job_title, description)
-            VALUES (?, ?)
-        ''', (job_title, description))
-
-    # Commit the transaction and close the connection
-    conn.commit()
-    conn.close()
-
-def get_job_description_from_db(job_title, db_file="backend/job_descriptions.db"):
-    """
-    Fetch a job description from the SQLite database.
-    
-    Searches the database for a job description matching the provided job title,
-    considering synonyms from the JOB_SYNONYMS dictionary.
-    
-    Args:
-        job_title (str): The job title to retrieve the description for
-        db_file (str): Path to the SQLite database file
-        
-    Returns:
-        str: The job description if found, or an error/not found message
-    """
-    job_title = JOB_SYNONYMS.get(job_title, job_title)  # Use synonym if available
-    
-    try:
-        # Connect to SQLite database
-        conn = sqlite3.connect(db_file)
-        cursor = conn.cursor()
-
-        # Query the database for job description
-        cursor.execute('''
-            SELECT description FROM job_descriptions 
-            WHERE job_title LIKE ?
-        ''', (f"%{job_title}%",))
-        
-        result = cursor.fetchone()
-        conn.close()
-        
-        if result:
-            return result[0]
-        else:
-            return f"No description found for {job_title}"
-            
-    except Exception as e:
-        print(f"Database error: {e}")
-        return f"Error retrieving description for {job_title}"

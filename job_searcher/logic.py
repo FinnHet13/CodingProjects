@@ -3,13 +3,10 @@ Business Logic Module - Contains the business logic for the application.
 """
 import os
 import pandas as pd
-import sqlite3
 from data import CsvJobClient
 
-# Constants - Configure important paths to job data in jobs.csv and job descriptions from 
-# Lightcast API in job_descriptions.db
 CSV_PATH = os.path.join(os.path.dirname(__file__), 'scripts', 'jobs.csv')
-DB_PATH = os.path.join(os.path.dirname(__file__), 'backend', 'job_descriptions.db')
+DESCRIPTIONS_PATH = os.path.join(os.path.dirname(__file__), 'backend', 'description.csv')
 
 # Two variables initialised to None here so they exist at module scope before any function runs.
 # Both are assigned their real values in the following functions.
@@ -20,6 +17,14 @@ DB_PATH = os.path.join(os.path.dirname(__file__), 'backend', 'job_descriptions.d
 # needing to restart the Flask app.
 _csv_client = None
 _csv_mtime = None
+
+# Load description.csv once at startup into a dict: {lowercase title -> description text}
+try:
+    _desc_df = pd.read_csv(DESCRIPTIONS_PATH)
+    _descriptions = dict(zip(_desc_df['Job Title'].str.lower(), _desc_df['Description']))
+except Exception as e:
+    print(f"Warning: Could not load job descriptions from {DESCRIPTIONS_PATH}: {e}")
+    _descriptions = {}
 
 def get_csv_client():
     """
@@ -78,33 +83,19 @@ def search_jobs(search_term, job_levels=None):
 
 def get_job_description(search_term):
     """
-    Get job description from SQLite database for a search term.
-    
-    Queries the SQLite database for job descriptions matching the provided search term.
-    The search uses SQL LIKE operator for partial matching.
-    
-    Args:
-        search_term (str): The term to search for in job titles
-        
-    Returns:
-        str: The first matching job description or a default message if none found
-    """
-    # Connect to the SQLite database
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+    Look up a plain-English overview for a job title from description.csv.
 
-    # Query the database for job descriptions matching the search term
-    query = "SELECT description FROM job_descriptions WHERE job_title LIKE ?"
-    cursor.execute(query, ('%' + search_term + '%',))
-    descriptions = cursor.fetchall()
-    
-    # Close the database connection
-    conn.close()
-    
-    # Return the first matching description or a default message
-    if descriptions:
-        return descriptions[0][0]
-    return "No matching job descriptions found."
+    Args:
+        search_term (str): The job title to look up (e.g. "Data Analyst")
+
+    Returns:
+        str: Description text, or empty string if not found
+    """
+    term = search_term.lower()
+    for title, desc in _descriptions.items():
+        if term in title or title in term:
+            return desc
+    return ""
 
 def get_analytics_data():
     """
