@@ -42,7 +42,7 @@ export default function HomePage() {
             </div>
             <div className="flex-1">
               <h1 className="text-4xl font-bold mb-4">Finn Hetzler</h1>
-              <p className="text-xl text-gray-300 mb-6">Master in Business Analytics @ Nova SBE</p>
+              <p className="text-xl text-gray-300 mb-6">Master in Business Analytics</p>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Here, I share my coding progress with projects reflecting my passion of bridging business and technology. Feel free to reach out to connect!
               </p>
