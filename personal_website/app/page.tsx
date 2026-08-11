@@ -49,7 +49,7 @@ export default function HomePage() {
               <div className="flex flex-wrap gap-4 text-sm">
                 <div className="flex items-center gap-2 text-gray-400">
                   <MapPin className="w-4 h-4" />
-                  Frankfurt, Germany
+                  Stuttgart, Germany
                 </div>
                 <Link
                   href="https://github.com/FinnHet13/CodingProjects"
